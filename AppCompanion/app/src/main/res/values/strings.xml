@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">LolRankedTracker</string>
+    <string name="player_profile_button">Profile</string>
+    <string name="player_champions_button">Champions</string>
+    <string name="player_match_history_button">Match History</string>
+    <string name="drawer_tracker_button">Tracker</string>
+    <string name="drawer_leaderboard_button">Leaderboard</string>
+    <string name="login_title">Login</string>
+    <string name="tracker_title">Tracker</string>
+    <string name="profile_title">Profile</string>
+    <string name="champions_title">Champions</string>
+    <string name="match_history_title">Match History</string>
+    <string name="ranked_leaderboard_title">Ranked Leaderboard</string>
 </resources>
