@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "219490456855",
+    "project_id": "lolrankedtracker",
+    "storage_bucket": "lolrankedtracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219490456855:android:f3ee00a8fca7ee613b1352",
+        "android_client_info": {
+          "package_name": "cdi.interfacedesign.lolrankedtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219490456855-s71pejs8nod61rdbni4mi64ivan7fm81.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cdi.interfacedesign.lolrankedtracker",
+            "certificate_hash": "3363be3090cbfcd1a09314b88858c189d3de737c"
+          }
+        },
+        {
+          "client_id": "219490456855-8aposfp2tqnlvb8sqc2qs3t6fr7e38ch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqzvVdOyoLbNljYeFiG9lcjziq56Stcuk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219490456855-8aposfp2tqnlvb8sqc2qs3t6fr7e38ch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
