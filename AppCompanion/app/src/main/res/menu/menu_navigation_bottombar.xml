@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/player_profile_button"
+            android:icon=""
+            android:title="@string/player_profile_button">
+        </item>
+        <item
+            android:id="@+id/player_champions_button"
+            android:icon=""
+            android:title="@string/player_champions_button">
+        </item>
+        <item
+            android:id="@+id/player_match_history_button"
+            android:icon=""
+            android:title="@string/player_match_history_button"
+            >
+        </item>
+    </group>
+
+</menu>
