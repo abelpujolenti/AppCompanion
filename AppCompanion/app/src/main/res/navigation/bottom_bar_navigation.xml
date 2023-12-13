@@ -7,6 +7,7 @@
 
     <fragment
         android:id="@+id/profile_navigation_screen"
+        android:name="cdi.interfacedesign.lolrankedtracker.screens.ProfileScreen"
         android:label="@string/profile_title"
         tools:layout="@layout/screen_player_profile">
 
@@ -28,6 +29,7 @@
 
     <fragment
         android:id="@+id/champions_navigation_screen"
+        android:name="cdi.interfacedesign.lolrankedtracker.screens.ChampionsScreen"
         android:label="@string/champions_title"
         tools:layout="@layout/screen_player_champions">
 
@@ -49,6 +51,7 @@
 
     <fragment
         android:id="@+id/match_history_navigation_screen"
+        android:name="cdi.interfacedesign.lolrankedtracker.screens.MatchHistoryScreen"
         android:label="@string/match_history_title"
         tools:layout="@layout/screen_player_match_history">
 
