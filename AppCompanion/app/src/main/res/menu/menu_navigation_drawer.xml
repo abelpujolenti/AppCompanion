@@ -4,15 +4,18 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/drawer_tracker_button"
             android:title="@string/drawer_tracker_button">
-
         </item>
         <item
             android:id="@+id/drawer_leaderboard_button"
             android:title="@string/drawer_leaderboard_button">
-
+        </item>
+        <item
+            android:id="@+id/drawer_configuration_button"
+            android:title="@string/drawer_configuration_button">
         </item>
 
     </group>

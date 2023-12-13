@@ -1,14 +1,43 @@
 <resources>
     <string name="app_name">LolRankedTracker</string>
+
+    <!--Login Screen-->
+    <string name="login_title">Login</string>
+    <string name="login_username_hint">Username</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
+
+    <!--Main Menu Screen-->
+    <string name="tracker_title">Tracker</string>
+    <string name="lol_ranked_tracker">Lol Ranked Tracker</string>
+    <string name="tracker_hint">Search for username</string>
+    <string name="add_button">Add</string>
+    <string name="tracked_players">Tracked Players</string>
+
+    <!--Drawer Navigation-->
+    <string name="drawer_tracker_button">Tracker</string>
+    <string name="drawer_leaderboard_button">Leaderboard</string>
+    <string name="drawer_configuration_button">Configuration</string>
+
+    <!--Profile Screen-->
+    <string name="profile_title">Profile</string>
+
+    <!--Champions Screen-->
+    <string name="champions_title">Champions</string>
+    <string name="champions_most_played">Most Played</string>
+    <string name="champions_highest_win_rate">Highest Win%</string>
+
+    <!--Match History-->
+    <string name="match_history_title">Match History</string>
+
+    <!--Leaderboard-->
+    <string name="ranked_leaderboard_title">Ranked Leaderboard</string>
+    <string name="ranked_solo">Ranked Solo</string>
+
+    <!--Bottom Bar-->
     <string name="player_profile_button">Profile</string>
     <string name="player_champions_button">Champions</string>
     <string name="player_match_history_button">Match History</string>
-    <string name="drawer_tracker_button">Tracker</string>
-    <string name="drawer_leaderboard_button">Leaderboard</string>
-    <string name="login_title">Login</string>
-    <string name="tracker_title">Tracker</string>
-    <string name="profile_title">Profile</string>
-    <string name="champions_title">Champions</string>
-    <string name="match_history_title">Match History</string>
-    <string name="ranked_leaderboard_title">Ranked Leaderboard</string>
+
 </resources>
