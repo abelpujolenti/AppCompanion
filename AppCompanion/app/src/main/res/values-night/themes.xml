@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.LolRankedTracker" parent="Theme.LolRankedTracker.Base">
-        <item name="android:background">@color/baseGrey</item>
+        <item name="android:background">@color/base_grey</item>
     </style>
 </resources>
