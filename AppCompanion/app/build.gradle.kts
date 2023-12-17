@@ -54,4 +54,7 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.firebaseui:firebase-ui-auth:7.2.0")
     implementation("com.google.firebase:firebase-firestore")
+    //API
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 }
