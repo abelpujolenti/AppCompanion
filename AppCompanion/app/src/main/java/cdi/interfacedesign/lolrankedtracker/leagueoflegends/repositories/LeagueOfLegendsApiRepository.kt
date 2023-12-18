@@ -1,34 +1,43 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories
 
+import android.util.Log
+import cdi.interfacedesign.lolrankedtracker.interceptors.HeaderInterceptor
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.LeagueData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.PlayerData
+import okhttp3.OkHttpClient
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.math.BigInteger
-import java.security.MessageDigest
-import java.sql.Timestamp
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
 
     companion object{
-        const val BASE_URL = "https://euw1.api.riotgames.com/lol/"
         const val API_KEY = "RGAPI-fca3bae3-c616-4228-bf6c-768f4ecfc22f"
+        const val BASE_URL_EUW1 = "euw1.api.riotgames.com/lol/"
+        const val BASE_URL_EUROPE = "europe.api.riotgames.com/lol/"
 
-        val Timestamp : String get() = Timestamp(System.currentTimeMillis()).time.toString()
+        private val client: OkHttpClient = OkHttpClient.Builder().apply {
+            interceptors().add(HeaderInterceptor(API_KEY))
+        }.build()
 
-        val Hash : String get(){
-            val input : String = "$Timestamp$API_KEY"
-            val messageDigest = MessageDigest.getInstance("MD5")
-            return BigInteger(1, messageDigest.digest(input.toByteArray()))
-                .toString(16).padStart(32, '0')
+        val ApiPlatformService : RetrofitLeagueOfLegendsApiService by lazy {
+            Retrofit.Builder()
+                .client(client)
+                .baseUrl(BASE_URL_EUW1)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(RetrofitLeagueOfLegendsApiService::class.java)
         }
 
-        val ApiService : RetrofitLeagueOfLegendsApiService by lazy {
+        val ApiRegionalService : RetrofitLeagueOfLegendsApiService by lazy {
             Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .client(client)
+                .baseUrl("https://$BASE_URL_EUROPE")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RetrofitLeagueOfLegendsApiService::class.java)
@@ -36,55 +45,41 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
     }
 
     interface RetrofitLeagueOfLegendsApiService {
-        @GET("summoner/v4/summoners/by-name/")
+        @GET("summoner/v4/summoners/by-name/{summonerName}")
         suspend fun GetProfile(
-            @Query("ts") timestamp: String = Timestamp,
-            @Query("apikey") apikey: String = API_KEY,
-            @Query("hash") hash: String = Hash,
-            @Query("summonerName") summonerName: String
+            @Path("summonerName") summonerName: String
         ) : Response<ProfileResponse>
 
-        @GET("league/v4/entries/by-summoner/")
+        @GET("league/v4/entries/by-summoner/{encryptedSummonerId}")
         suspend fun GetLeague(
-            @Query("ts") timestamp: String = Timestamp,
-            @Query("apikey") apikey: String = API_KEY,
-            @Query("hash") hash: String = Hash,
-            @Query("encryptedSummonerId") encryptedSummonerId: String
-        ) : Response<LeagueResponse>
+            @Path("encryptedSummonerId") encryptedSummonerId: String
+        ) : Response<Set<LeagueResponse>>
 
-        @GET("match/v5/matches/by-puuid/")
+        @GET("match/v5/matches/by-puuid/{puuid}/ids")
         suspend fun GetMatchList(
-            @Query("ts") timestamp: String = Timestamp,
-            @Query("apikey") apikey: String = API_KEY,
-            @Query("hash") hash: String = Hash,
-            @Query("puuid") puuid: String,
+            @Path("puuid") puuid: String,
             @Query("start") start: Int,
             @Query("count") count: Int,
-        ) : Response<MatchListResponse>
+        ) : //Call<MatchListResponse>
+        Response<MatchListResponse>
 
-        @GET("match/v5/matches/")
+        @GET("match/v5/matches/{matchId}")
         suspend fun GetMatch(
-            @Query("ts") timestamp: String = Timestamp,
-            @Query("apikey") apikey: String = API_KEY,
-            @Query("hash") hash: String = Hash,
-            @Query("matchId") matchId: String
+            @Path("matchId") matchId: String
         ) : Response<MatchResponse>
 
-        @GET("league-exp/v4/entries/")
+        @GET("league-exp/v4/entries/{queue}/{tier}/{division}")
         suspend fun GetLeaderboard(
-            @Query("ts") timestamp: String = Timestamp,
-            @Query("apikey") apikey: String = API_KEY,
-            @Query("hash") hash: String = Hash,
-            @Query("queue") queue: String,
-            @Query("tier") tier: String,
-            @Query("division") division: String,
+            @Path("queue") queue: String,
+            @Path("tier") tier: String,
+            @Path("division") division: String,
             @Query("page") page: Int,
-        ) : Response<LeaderboardResponse>
+        ) : Response<Set<LeaderboardResponse>>
     }
 
     override suspend fun GetProfile(summonerName: String): PlayerData?{
 
-        val responseProfile = ApiService.GetProfile(summonerName = summonerName)
+        val responseProfile = ApiPlatformService.GetProfile(summonerName = summonerName)
 
         if (!responseProfile.isSuccessful){
 
@@ -95,7 +90,24 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
             return null;
         }
 
-        val responseMatchesList = ApiService.GetMatchList(puuid = puuid, start = 0, count = 20)
+        Log.e("RIOTPuuid", puuid)
+
+        val responseMatchesList = ApiRegionalService.GetMatchList(puuid = puuid, start = 0, count = 20)
+
+        /*val responseMatchesList = ApiRegionalService.GetMatchList(puuid = puuid, start = 0, count = 20).enqueue(object : Callback<MatchListResponse>{
+            override fun onFailure(call: Call<MatchListResponse>, t: Throwable) {
+                Log.e("Error", "error", t)
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<MatchListResponse>,
+                response: Response<MatchListResponse>
+            ) {
+                Log.e("Error", "error")
+                println(response)
+            }
+        })*/
 
         if (responseMatchesList.isSuccessful){
 
@@ -106,7 +118,9 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
             return null;
         }
 
-        val responseLeague = ApiService.GetLeague(encryptedSummonerId = id)
+        Log.e("RIOTId", id)
+
+        val responseLeague = ApiPlatformService.GetLeague(encryptedSummonerId = id)
 
         if (!responseLeague.isSuccessful){
 
@@ -116,6 +130,8 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         val name: String = responseProfile.body()?.name?: run{
             return null;
         }
+
+        Log.e("RIOTname", name)
 
         val profileIconId: Int = responseProfile.body()?.profileIconId?: run{
             return null;
@@ -129,14 +145,14 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
             return null;
         }
 
-        val leagueData = responseLeague.body()?.leaguesData?: run {
+        /*val leagueData = responseLeague.body()?.leaguesData?: run {
             return null;
         }
 
-        val leaguesData = FillLeagueData(leagueData)
+        val leaguesData = FillLeagueData(leagueData)*/
 
-        return PlayerData(id, puuid, name, profileIconId, summonerLevel, matchList, leaguesData[0],
-            leaguesData[1])
+        return PlayerData(id, puuid, name, profileIconId, summonerLevel/*, matchList, leaguesData[0],
+            leaguesData[1]*/)
     }
 
     fun FillLeagueData(leagueData: MutableList<LeagueResponseData>): MutableList<LeagueData>{
