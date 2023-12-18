@@ -1,9 +1,10 @@
-package cdi.interfacedesign.lolrankedtracker.leagueoflegends
+package cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import cdi.interfacedesign.lolrankedtracker.R
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 
 class PlayerViewHolder(view: View, var player: PlayerData? = null) : ViewHolder(view) {
 

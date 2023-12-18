@@ -1,4 +1,4 @@
-package cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories
+package cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses
 
 data class LeagueResponse(val leaguesData: MutableList<LeagueResponseData>)
 

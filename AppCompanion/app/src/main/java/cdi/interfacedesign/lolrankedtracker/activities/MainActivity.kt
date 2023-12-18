@@ -5,8 +5,9 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cdi.interfacedesign.lolrankedtracker.R
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.PlayerAdapter
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsApiRepository
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.PlayerAdapter
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsMockRepository
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsSharedDataBase
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         table.layoutManager = LinearLayoutManager(this)
 
-        val repository = LeagueOfLegendsApiRepository();
+        //val repository = LeagueOfLegendsSharedDataBase()
+        val repository = LeagueOfLegendsMockRepository();
+        //val repository = LeagueOfLegendsApiRepository();
 
         table.adapter = PlayerAdapter(repository)
 

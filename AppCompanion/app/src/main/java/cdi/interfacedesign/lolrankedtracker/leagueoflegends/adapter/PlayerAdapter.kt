@@ -1,4 +1,4 @@
-package cdi.interfacedesign.lolrankedtracker.leagueoflegends
+package cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter
 
 import android.content.Intent
 import android.util.Log
@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import cdi.interfacedesign.lolrankedtracker.R
 import cdi.interfacedesign.lolrankedtracker.activities.MainMenuActivity
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder.PlayerViewHolder
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.provider.PlayerProvider
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +39,7 @@ class PlayerAdapter(private val repository: LeagueOfLegendsRepository,
     override fun getItemCount(): Int = 1
 
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
-        holder.SetupWithPlayer(playerList[0])
+        holder.SetupWithPlayer(playerList[position])
     }
 
     fun GetMoreData(){
@@ -50,10 +53,7 @@ class PlayerAdapter(private val repository: LeagueOfLegendsRepository,
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            val player2: PlayerData = provider.GetPaginatedPlayer("abeltron999") ?: run{
-                Log.e("RIOTCoroutine2", "coroutine2")
-                return@launch;
-            }
+            val player2: PlayerData = provider.GetPaginatedPlayer("abeltron999")
 
             Log.e("RIOTCoroutine", "coroutine")
 

@@ -2,11 +2,15 @@ package cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories
 
 import android.util.Log
 import cdi.interfacedesign.lolrankedtracker.interceptors.HeaderInterceptor
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.LeagueData
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.PlayerData
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.LeagueData
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.LeaderboardResponse
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.LeagueResponse
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.LeagueResponseData
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.MatchListResponse
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.MatchResponse
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.ProfileResponse
 import okhttp3.OkHttpClient
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -77,17 +81,21 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         ) : Response<Set<LeaderboardResponse>>
     }
 
-    override suspend fun GetProfile(summonerName: String): PlayerData?{
+    override suspend fun GetPlayersProfile(offset: Int, limit: Int): MutableList<PlayerData> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun GetPlayerProfile(summonerName: String): PlayerData{
 
         val responseProfile = ApiPlatformService.GetProfile(summonerName = summonerName)
 
         if (!responseProfile.isSuccessful){
 
-            return null;
+            return PlayerData();
         }
 
         val puuid: String = responseProfile.body()?.puuid?: run{
-            return null;
+            return PlayerData();
         }
 
         Log.e("RIOTPuuid", puuid)
@@ -111,11 +119,11 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
 
         if (responseMatchesList.isSuccessful){
 
-            return null;
+            return PlayerData();
         }
 
         val id: String = responseProfile.body()?.id?: run{
-            return null;
+            return PlayerData();
         }
 
         Log.e("RIOTId", id)
@@ -124,25 +132,25 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
 
         if (!responseLeague.isSuccessful){
 
-            return null;
+            return PlayerData();
         }
 
         val name: String = responseProfile.body()?.name?: run{
-            return null;
+            return PlayerData();
         }
 
         Log.e("RIOTname", name)
 
         val profileIconId: Int = responseProfile.body()?.profileIconId?: run{
-            return null;
+            return PlayerData();
         }
 
         val summonerLevel: Long = responseProfile.body()?.summonerLevel?:run{
-            return null;
+            return PlayerData();
         }
 
         val matchList = responseMatchesList.body()?.matchList?: run{
-            return null;
+            return PlayerData();
         }
 
         /*val leagueData = responseLeague.body()?.leaguesData?: run {

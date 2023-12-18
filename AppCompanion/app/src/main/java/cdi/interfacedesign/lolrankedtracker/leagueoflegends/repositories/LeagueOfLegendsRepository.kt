@@ -1,10 +1,11 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories
 
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.PlayerData
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 
 interface LeagueOfLegendsRepository {
 
-    suspend fun GetProfile(summonerName: String) : PlayerData?
+    suspend fun GetPlayersProfile(offset: Int, limit: Int): MutableList<PlayerData>
+    suspend fun GetPlayerProfile(summonerName: String) : PlayerData
     suspend fun GetLeague()
     suspend fun GetMatchList()
     suspend fun GetMatch()
