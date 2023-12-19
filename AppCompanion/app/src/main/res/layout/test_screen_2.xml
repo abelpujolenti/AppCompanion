@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         tools:text="Hero Name"
         android:textAlignment="center"
-        android:textSize="48dp"
+        android:textSize="24dp"
         >
 
     </TextView>
@@ -44,6 +44,97 @@
 
     <TextView
         android:id="@+id/summonerLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Hero Description"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_marginTop="16dp"
+        >
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/matches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Hero Description"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_marginTop="16dp"
+        >
+
+    </TextView>
+
+
+    <TextView
+        android:id="@+id/soloTier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Hero Description"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_marginTop="16dp"
+        >
+
+    </TextView>
+
+
+    <TextView
+        android:id="@+id/soloRank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Hero Description"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_marginTop="16dp"
+        >
+
+    </TextView>
+
+
+    <TextView
+        android:id="@+id/solo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Hero Description"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_marginTop="16dp"
+        >
+
+    </TextView>
+
+
+    <TextView
+        android:id="@+id/flexTier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Hero Description"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_marginTop="16dp"
+        >
+
+    </TextView>
+
+
+    <TextView
+        android:id="@+id/flexRank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Hero Description"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_marginTop="16dp"
+        >
+
+    </TextView>
+
+
+
+    <TextView
+        android:id="@+id/flex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Hero Description"

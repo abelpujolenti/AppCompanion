@@ -6,7 +6,6 @@ import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.LeagueData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.LeaderboardResponse
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.LeagueResponse
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.LeagueResponseData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.MatchListResponse
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.MatchResponse
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.ProfileResponse
@@ -20,10 +19,12 @@ import retrofit2.http.Query
 
 class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
 
+    val RANKED_SOLO = "RANKED_SOLO_5x5"
+
     companion object{
         const val API_KEY = "RGAPI-fca3bae3-c616-4228-bf6c-768f4ecfc22f"
-        const val BASE_URL_EUW1 = "euw1.api.riotgames.com/lol/"
-        const val BASE_URL_EUROPE = "europe.api.riotgames.com/lol/"
+        const val BASE_URL_EUW1 = "https://euw1.api.riotgames.com/lol/"
+        const val BASE_URL_EUROPE = "https://europe.api.riotgames.com/lol/"
 
         private val client: OkHttpClient = OkHttpClient.Builder().apply {
             interceptors().add(HeaderInterceptor(API_KEY))
@@ -41,7 +42,7 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         val ApiRegionalService : RetrofitLeagueOfLegendsApiService by lazy {
             Retrofit.Builder()
                 .client(client)
-                .baseUrl("https://$BASE_URL_EUROPE")
+                .baseUrl(BASE_URL_EUROPE)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RetrofitLeagueOfLegendsApiService::class.java)
@@ -57,15 +58,14 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         @GET("league/v4/entries/by-summoner/{encryptedSummonerId}")
         suspend fun GetLeague(
             @Path("encryptedSummonerId") encryptedSummonerId: String
-        ) : Response<Set<LeagueResponse>>
+        ) : Response<List<LeagueResponse>>
 
         @GET("match/v5/matches/by-puuid/{puuid}/ids")
         suspend fun GetMatchList(
             @Path("puuid") puuid: String,
             @Query("start") start: Int,
             @Query("count") count: Int,
-        ) : //Call<MatchListResponse>
-        Response<MatchListResponse>
+        ) : Response<List<String>>
 
         @GET("match/v5/matches/{matchId}")
         suspend fun GetMatch(
@@ -78,7 +78,7 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
             @Path("tier") tier: String,
             @Path("division") division: String,
             @Query("page") page: Int,
-        ) : Response<Set<LeaderboardResponse>>
+        ) : Response<List<LeaderboardResponse>>
     }
 
     override suspend fun GetPlayersProfile(offset: Int, limit: Int): MutableList<PlayerData> {
@@ -98,26 +98,9 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
             return PlayerData();
         }
 
-        Log.e("RIOTPuuid", puuid)
-
         val responseMatchesList = ApiRegionalService.GetMatchList(puuid = puuid, start = 0, count = 20)
 
-        /*val responseMatchesList = ApiRegionalService.GetMatchList(puuid = puuid, start = 0, count = 20).enqueue(object : Callback<MatchListResponse>{
-            override fun onFailure(call: Call<MatchListResponse>, t: Throwable) {
-                Log.e("Error", "error", t)
-                t.printStackTrace()
-            }
-
-            override fun onResponse(
-                call: Call<MatchListResponse>,
-                response: Response<MatchListResponse>
-            ) {
-                Log.e("Error", "error")
-                println(response)
-            }
-        })*/
-
-        if (responseMatchesList.isSuccessful){
+        if (!responseMatchesList.isSuccessful){
 
             return PlayerData();
         }
@@ -125,8 +108,6 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         val id: String = responseProfile.body()?.id?: run{
             return PlayerData();
         }
-
-        Log.e("RIOTId", id)
 
         val responseLeague = ApiPlatformService.GetLeague(encryptedSummonerId = id)
 
@@ -139,8 +120,6 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
             return PlayerData();
         }
 
-        Log.e("RIOTname", name)
-
         val profileIconId: Int = responseProfile.body()?.profileIconId?: run{
             return PlayerData();
         }
@@ -149,35 +128,43 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
             return PlayerData();
         }
 
-        val matchList = responseMatchesList.body()?.matchList?: run{
+        val matchList = responseMatchesList.body()?: run{
             return PlayerData();
         }
 
-        /*val leagueData = responseLeague.body()?.leaguesData?: run {
-            return null;
+        val leagueData = responseLeague.body()?: run {
+            return PlayerData();
         }
 
-        val leaguesData = FillLeagueData(leagueData)*/
+        val leaguesData = FillLeagueData(leagueData)
 
-        return PlayerData(id, puuid, name, profileIconId, summonerLevel/*, matchList, leaguesData[0],
-            leaguesData[1]*/)
+        var player = PlayerData(id, puuid, name, profileIconId, summonerLevel, matchList, leaguesData)
+
+        return player
     }
 
-    fun FillLeagueData(leagueData: MutableList<LeagueResponseData>): MutableList<LeagueData>{
+    fun FillLeagueData(leagueData: List<LeagueResponse>): Array<LeagueData?>{
 
-        val leaguesData = mutableListOf<LeagueData>()
+        var leaguesData = arrayOfNulls<LeagueData?>(2)
 
         for (i in leagueData.indices){
+            val leagueQueueType = leagueData[i].queueType
             val leagueTier = leagueData[i].tier
             val leagueRank = leagueData[i].rank
             val leagueLeaguePoints = leagueData[i].leaguePoints
             val leagueWins = leagueData[i].wins
             val leagueLosses = leagueData[i].losses
 
-            val leagueData = LeagueData(leagueTier, leagueRank,
+            val leagueData = LeagueData(leagueQueueType, leagueTier, leagueRank,
                 leagueLeaguePoints, leagueWins, leagueLosses)
 
-            leaguesData.add(leagueData)
+            if (leagueQueueType == RANKED_SOLO)
+            {
+                leaguesData[0] = leagueData
+                continue
+            }
+
+            leaguesData[1] = leagueData
         }
 
         return leaguesData;

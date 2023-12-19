@@ -1,4 +1,4 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.data
 
-data class LeagueData(val tier: String, val rank: String, val leaguePoints: Int, val wins: Int,
-                      val losses: Int)
+data class LeagueData(val queueType:String, val tier: String? = null, val rank: String? = null, val leaguePoints: Int,
+                        val wins: Int, val losses: Int)

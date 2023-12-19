@@ -36,7 +36,7 @@ class PlayerAdapter(private val repository: LeagueOfLegendsRepository,
         return viewHolder
     }
 
-    override fun getItemCount(): Int = 1
+    override fun getItemCount(): Int = playerList.count()
 
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         holder.SetupWithPlayer(playerList[position])
@@ -53,13 +53,11 @@ class PlayerAdapter(private val repository: LeagueOfLegendsRepository,
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            val player2: PlayerData = provider.GetPaginatedPlayer("abeltron999")
-
-            Log.e("RIOTCoroutine", "coroutine")
+            val player: PlayerData = provider.GetPaginatedPlayer("abeltron999")
 
             CoroutineScope(Dispatchers.Main).launch {
 
-                playerList.add(player2)
+                playerList.add(player)
                 notifyDataSetChanged()
                 requestingData = false
             }
