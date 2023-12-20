@@ -1,13 +1,13 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories
 
-import android.util.Log
 import cdi.interfacedesign.lolrankedtracker.interceptors.HeaderInterceptor
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.LeagueData
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.MatchData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.LeaderboardResponse
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.LeagueResponse
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.MatchListResponse
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.MatchResponse
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.MatchResponseParticipant
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.ProfileResponse
 import okhttp3.OkHttpClient
 import retrofit2.Response
@@ -81,66 +81,44 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         ) : Response<List<LeaderboardResponse>>
     }
 
-    override suspend fun GetPlayersProfile(offset: Int, limit: Int): MutableList<PlayerData> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun GetPlayerProfile(summonerName: String): PlayerData{
+    override suspend fun GetPlayerProfile(summonerName: String): PlayerData?{
 
         val responseProfile = ApiPlatformService.GetProfile(summonerName = summonerName)
 
         if (!responseProfile.isSuccessful){
 
-            return PlayerData();
+            return null
         }
 
-        val puuid: String = responseProfile.body()?.puuid?: run{
-            return PlayerData();
+        val response = responseProfile.body()?: run {
+            return null
         }
 
-        val responseMatchesList = ApiRegionalService.GetMatchList(puuid = puuid, start = 0, count = 20)
+        val puuid: String = response.puuid
 
-        if (!responseMatchesList.isSuccessful){
+        val id: String = response.id
 
-            return PlayerData();
+        val name: String = response.name
+
+        val profileIconId: Int = response.profileIconId
+
+        val summonerLevel: Long = response.summonerLevel
+
+        val matchesList = GetMatchesList(puuid, 0, 20)
+
+        if (matchesList.isEmpty()){
+            return null
         }
 
-        val id: String = responseProfile.body()?.id?: run{
-            return PlayerData();
-        }
+        val leagueData = GetLeague(id);
 
-        val responseLeague = ApiPlatformService.GetLeague(encryptedSummonerId = id)
-
-        if (!responseLeague.isSuccessful){
-
-            return PlayerData();
-        }
-
-        val name: String = responseProfile.body()?.name?: run{
-            return PlayerData();
-        }
-
-        val profileIconId: Int = responseProfile.body()?.profileIconId?: run{
-            return PlayerData();
-        }
-
-        val summonerLevel: Long = responseProfile.body()?.summonerLevel?:run{
-            return PlayerData();
-        }
-
-        val matchList = responseMatchesList.body()?: run{
-            return PlayerData();
-        }
-
-        val leagueData = responseLeague.body()?: run {
-            return PlayerData();
+        if (leagueData.isEmpty()){
+            return null
         }
 
         val leaguesData = FillLeagueData(leagueData)
 
-        var player = PlayerData(id, puuid, name, profileIconId, summonerLevel, matchList, leaguesData)
-
-        return player
+        return PlayerData(id, puuid, name, profileIconId, summonerLevel, matchesList, leaguesData)
     }
 
     fun FillLeagueData(leagueData: List<LeagueResponse>): Array<LeagueData?>{
@@ -170,19 +148,108 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         return leaguesData;
     }
 
-    override suspend fun GetLeague() {
-        TODO("Not yet implemented")
+    override suspend fun GetLeague(summonerId: String): List<LeagueResponse> {
+
+        val responseLeague = ApiPlatformService.GetLeague(encryptedSummonerId = summonerId)
+
+        if (!responseLeague.isSuccessful){
+
+            return emptyList<LeagueResponse>();
+        }
+
+        val leagueData = responseLeague.body()?: run {
+            return emptyList<LeagueResponse>();
+        }
+
+        return leagueData
+
     }
 
-    override suspend fun GetMatchList() {
-        TODO("Not yet implemented")
+    override suspend fun GetMatchesList(puuid: String, start: Int, count: Int): List<String> {
+
+        val responseMatchesList = ApiRegionalService.GetMatchList(puuid = puuid, start = 0, count = 20)
+
+        if (!responseMatchesList.isSuccessful){
+
+            return emptyList<String>();
+        }
+
+        val matchList = responseMatchesList.body()?: run{
+            return emptyList<String>();
+        }
+
+        return matchList
     }
 
-    override suspend fun GetMatch() {
-        TODO("Not yet implemented")
+    override suspend fun GetMatch(puuid: String, matchId: String): MatchData? {
+
+        val responseMatch = ApiRegionalService.GetMatch(matchId)
+
+        if (!responseMatch.isSuccessful){
+            return null;
+        }
+
+        val info = responseMatch.body()?.info?: run{
+            return null;
+        }
+
+        val participants = info.participants
+
+        lateinit var participant: MatchResponseParticipant
+
+        var match: Boolean = false
+
+        for (auxParticipant in participants){
+            if (auxParticipant.puuid == puuid)
+            {
+                participant = auxParticipant
+                match = true;
+                break;
+            }
+        }
+
+        if (!match){
+            return null;
+        }
+
+        val win = participant.win
+
+        val queueId = info.queueId
+
+        val gameDuration = info.gameDuration
+
+        val gameStartTimestamp = info.gameStartTimestamp
+
+        val gameEndTimestamp = info.gameEndTimestamp
+
+        val championName = participant.championName
+
+        val summoner1Id = participant.summoner1Id
+
+        val summoner2Id = participant.summoner2Id
+
+        val perk = participant.perks.styles[0].selections[0].perk
+
+        val style = participant.perks.styles[1].style
+
+        val item0 = participant.item0
+
+        val item1 = participant.item1
+
+        val item2 = participant.item2
+
+        val item3 = participant.item3
+
+        val item4 = participant.item4
+
+        val item5 = participant.item5
+
+        return MatchData(queueId, win, gameDuration, gameStartTimestamp, gameEndTimestamp, championName,
+            summoner1Id, summoner2Id, perk, style, item0, item1, item2, item3, item4, item5)
+
     }
 
-    override suspend fun GetLeaderboard() {
+    override suspend fun GetLeaderboard(offset: Int, limit: Int): MutableList<PlayerData> {
         TODO("Not yet implemented")
     }
 

@@ -53,7 +53,7 @@ class PlayerAdapter(private val repository: LeagueOfLegendsRepository,
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            val player: PlayerData = provider.GetPaginatedPlayer("abeltron999")
+            val player: PlayerData = provider.GetPaginatedPlayer("Briαr Lσver")
 
             CoroutineScope(Dispatchers.Main).launch {
 
