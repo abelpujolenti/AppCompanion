@@ -22,7 +22,7 @@
         <item name="android:spotShadowAlpha">0.7</item>
 
         <!--Background App-->
-        <item name="android:colorBackground">?attr/colorPrimary</item>       
+        <item name="android:colorBackground">?attr/colorPrimary</item>
 
         <!-- Customize your theme here. -->
         <item name="navigationViewStyle">@style/LolRankedTracker.Drawer</item>
