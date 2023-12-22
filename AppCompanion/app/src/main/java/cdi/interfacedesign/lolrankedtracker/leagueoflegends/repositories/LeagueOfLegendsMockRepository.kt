@@ -1,6 +1,8 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories
 
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.MatchData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.LeagueResponse
 
 class LeagueOfLegendsMockRepository : LeagueOfLegendsRepository {
 
@@ -11,25 +13,6 @@ class LeagueOfLegendsMockRepository : LeagueOfLegendsRepository {
             PlayerData("1", "2", "abel", 33, 618)
         )
 
-    }
-
-    override suspend fun GetPlayersProfile(offset: Int, limit: Int): MutableList<PlayerData>
-    {
-        val playersList = playersListHardcoded
-
-        val listSize = playersList.size
-
-        if (listSize <= offset)
-        {
-            return mutableListOf()
-        }
-
-        if (listSize <= offset + limit)
-        {
-            return playersList.subList(offset, listSize - 1)
-        }
-
-        return playersList.subList(offset, limit)
     }
 
     override suspend fun GetPlayerProfile(summonerName: String): PlayerData
@@ -48,19 +31,19 @@ class LeagueOfLegendsMockRepository : LeagueOfLegendsRepository {
         return playerData
     }
 
-    override suspend fun GetLeague() {
+    override suspend fun GetLeague(summonerId: String): List<LeagueResponse> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun GetMatchList() {
+    override suspend fun GetMatchesList(puuid: String, start: Int, count: Int): List<String> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun GetMatch() {
+    override suspend fun GetMatch(puuid: String, matchId: String): MatchData? {
         TODO("Not yet implemented")
     }
 
-    override suspend fun GetLeaderboard() {
+    override suspend fun GetLeaderboard(offset: Int, limit: Int): MutableList<PlayerData> {
         TODO("Not yet implemented")
     }
 }

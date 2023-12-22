@@ -5,7 +5,7 @@ import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueO
 
 class PlayerProvider(val repository: LeagueOfLegendsRepository) {
 
-    suspend fun GetPaginatedPlayer(summonerName: String) : PlayerData{
+    suspend fun GetPaginatedPlayer(summonerName: String) : PlayerData?{
         return repository.GetPlayerProfile(summonerName)
     }
 

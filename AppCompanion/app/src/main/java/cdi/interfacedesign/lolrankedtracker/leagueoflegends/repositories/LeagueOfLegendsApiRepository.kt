@@ -86,7 +86,6 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         val responseProfile = ApiPlatformService.GetProfile(summonerName = summonerName)
 
         if (!responseProfile.isSuccessful){
-
             return null
         }
 
