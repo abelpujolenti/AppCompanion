@@ -31,6 +31,7 @@
         <item name="snackbarStyle">@style/LolRankedTracker.Snackbar</item>
         <item name="snackbarTextViewStyle">@style/LolRankedTracker.Snackbar.TextView</item>
         <item name="android:textViewStyle">@style/LolRankedTracker.TextView</item>
+        <item name="fontFamily">@font/beaufort_bold</item>
 
     </style>
 
@@ -39,6 +40,8 @@
         <item name="android:elevation">@dimen/shadow_elevation</item>
         <item name="itemIconTint">@color/yellow_medium</item>
         <item name="itemTextColor">@color/yellow_dark</item>
+        <item name="android:fontFamily">?attr/fontFamily</item>
+        <item name="android:textSize">@dimen/medium</item>
     </style>
 
     <style name="LolRankedTracker.Toolbar" parent="Widget.MaterialComponents.Toolbar">
@@ -46,13 +49,17 @@
         <item name="android:elevation">@dimen/shadow_elevation</item>
         <item name="itemIconTint">@color/base_light</item>
         <item name="itemTextColor">@color/base_light</item>
+        <item name="android:fontFamily">?attr/fontFamily</item>
+        <item name="android:textSize">@dimen/medium</item>
     </style>
 
     <style name="LolRankedTracker.Bottombar" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="android:background">@color/blue_dark</item>
         <item name="android:elevation">@dimen/shadow_elevation</item>
-        <item name="itemIconTint">@color/yellow_medium</item>
-        <item name="itemTextColor">@color/yellow_dark</item>
+        <item name="itemIconTint">@color/selectables_buttons_color</item>
+        <item name="itemTextColor">@color/selectables_buttons_color</item>
+        <item name="android:fontFamily">?attr/fontFamily</item>
+        <item name="android:textSize">@dimen/small</item>
     </style>
 
     <style name="LolRankedTracker.Snackbar" parent="Widget.MaterialComponents.Snackbar">
@@ -65,6 +72,8 @@
 
     <style name="LolRankedTracker.TextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/base_grey</item>
+        <item name="android:fontFamily">?attr/fontFamily</item>
+        <item name="android:textSize">@dimen/medium</item>
     </style>
 
 </resources>

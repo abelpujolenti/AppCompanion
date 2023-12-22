@@ -2,14 +2,14 @@ package cdi.interfacedesign.lolrankedtracker.firebase
 
 import android.net.Uri
 import com.google.firebase.Firebase
-//import com.google.firebase.storage.storage
+import com.google.firebase.storage.storage
 import java.lang.Exception
 import java.nio.file.FileSystems
 import java.nio.file.Path
 
 class MyFirebaseStorage {
 
-    /*private val storage = Firebase.storage
+    private val storage = Firebase.storage
     private val storageRootReference = storage.reference
 
     private val imagesPath = "Images"
@@ -27,5 +27,5 @@ class MyFirebaseStorage {
                     .addOnFailureListener(onFailure)
             }
             .addOnFailureListener(onFailure)
-    }*/
+    }
 }

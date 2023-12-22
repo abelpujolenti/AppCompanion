@@ -4,7 +4,7 @@ import cdi.interfacedesign.lolrankedtracker.firebase.models.DataBaseData
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
-class MyFirebaseDatBase {
+class MyFirebaseDataBase {
 
     val store = Firebase.firestore
 

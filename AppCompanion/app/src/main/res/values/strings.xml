@@ -10,7 +10,7 @@
 
     <!--Main Menu Screen-->
     <string name="tracker_title">Tracker</string>
-    <string name="lol_ranked_tracker">Lol Ranked Tracker</string>
+    <string name="lol_ranked_tracker">LoL Ranked Tracker</string>
     <string name="tracker_hint">Search for username</string>
     <string name="add_button">Add</string>
     <string name="tracked_players">Tracked Players</string>
@@ -39,5 +39,7 @@
     <string name="player_profile_button">Profile</string>
     <string name="player_champions_button">Champions</string>
     <string name="player_match_history_button">Match History</string>
+    <string name="exit">Exit</string>
+    <string name="search_for_username">Search for username</string>
 
 </resources>

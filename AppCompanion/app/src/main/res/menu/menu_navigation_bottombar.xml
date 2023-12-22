@@ -3,17 +3,17 @@
     <group>
         <item
             android:id="@+id/player_profile_button"
-
+            android:icon="@drawable/profile_icon"
             android:title="@string/player_profile_button">
         </item>
         <item
             android:id="@+id/player_champions_button"
-
+            android:icon="@drawable/champions_icon"
             android:title="@string/player_champions_button">
         </item>
         <item
             android:id="@+id/player_match_history_button"
-
+            android:icon="@drawable/match_history_icon"
             android:title="@string/player_match_history_button"
             >
         </item>

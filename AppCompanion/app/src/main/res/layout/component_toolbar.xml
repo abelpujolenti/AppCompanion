@@ -8,8 +8,10 @@
         android:id="@+id/app_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/login_title"
-        app:navigationIcon="@drawable/tool_bar_navigation_icon">
+        app:title="@string/profile_title"
+        app:titleTextAppearance="@style/LolRankedTracker.Toolbar"
+        app:navigationIcon="@drawable/tool_bar_navigation_icon"
+        app:menu="@menu/menu_base_toolbar">
 
     </com.google.android.material.appbar.MaterialToolbar>
 

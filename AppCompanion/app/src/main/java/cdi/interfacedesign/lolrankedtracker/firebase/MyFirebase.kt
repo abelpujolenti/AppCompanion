@@ -9,7 +9,7 @@ class MyFirebase {
         lateinit var analytics: MyFirebaseAnalytics;
         lateinit var authentication: MyFirebaseAuthentication;
         val crashlytics = MyCrashlytics();
-        val dataBase = MyFirebaseDatBase();
+        val dataBase = MyFirebaseDataBase();
         val storage = MyFirebaseStorage();
 
         fun Init(appContext: Application){
