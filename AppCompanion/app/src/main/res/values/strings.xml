@@ -41,5 +41,9 @@
     <string name="player_match_history_button">Match History</string>
     <string name="exit">Exit</string>
     <string name="search_for_username">Search for username</string>
+    <string name="user_login_message">Hello %s you are logged</string>
+    <string name="login_error">Error on try to log in</string>
+    <string name="tier_rank">%s %s</string>
+    <string name="configuration_title">Configuration</string>
 
 </resources>

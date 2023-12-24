@@ -1,6 +1,7 @@
 package cdi.interfacedesign.lolrankedtracker.fragments.components
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ class AppNavigationHost : Fragment() {
         fun get() = instance
     }
 
+    lateinit var fragmentView: View
     lateinit var navigationHost : NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,12 +29,11 @@ class AppNavigationHost : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.component_navigation_host, container, false)
-
+    ): View {
+        fragmentView = inflater.inflate(R.layout.component_navigation_host, container, false)
         val navigationHostFragment = childFragmentManager.findFragmentById(R.id.app_navigation_host_fragment) as NavHostFragment
         navigationHost = navigationHostFragment.navController
-        return view
+        return fragmentView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

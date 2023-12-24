@@ -6,12 +6,34 @@ import com.google.firebase.firestore.firestore
 
 class MyFirebaseDataBase {
 
-    val store = Firebase.firestore
+    val dataBase = Firebase.firestore
+
+    fun <T: DataBaseData> Save(data: T, onSuccess: (T) -> Unit, onFailure: (Exception) -> Unit) {
+
+        val table = dataBase.collection(data.GetTable())
+        val id = data.id ?: table.document().id
+        data.id = id
+
+        table
+            .document(id)
+            .set(data)
+            .addOnSuccessListener {
+                onSuccess(data)
+            }
+            .addOnFailureListener { exception ->
+
+                MyFirebase.crashlytics.logError(exception) {
+                    key("Object", data.toString())
+                    key("Error Type", "Insert Or Update Error")
+                }
+
+                onFailure(exception)
+            }
+    }
 
     inline fun <reified T:DataBaseData> Find(id: String, tableName: String, crossinline onSuccess: (T) -> Unit, crossinline onFailure: (Exception) -> Unit){
 
-        val table = store.collection(tableName)
-        table
+        dataBase.collection(tableName)
             .document(id)
             .get()
             .addOnSuccessListener { documentSnapshot ->

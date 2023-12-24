@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_menu_navigation"
+    app:startDestination="@id/tracker_navigation_screen">
+
+    <fragment
+        android:id="@+id/tracker_navigation_screen"
+        android:name="cdi.interfacedesign.lolrankedtracker.fragments.screens.TrackerScreen"
+        android:label="@string/tracker_title"
+        tools:layout="@layout/screen_tracker">
+
+        <action
+            android:id="@+id/transition_tracker_to_ranked_leaderboard"
+            app:destination="@+id/ranked_leaderboard_navigation_screen"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left">
+        </action>
+
+        <action
+            android:id="@+id/transition_tracker_to_configuration"
+            app:destination="@+id/configuration_navigation_screen"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left">
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/ranked_leaderboard_navigation_screen"
+        android:name="cdi.interfacedesign.lolrankedtracker.fragments.screens.ChampionsScreen"
+        android:label="@string/ranked_leaderboard_title"
+        tools:layout="@layout/screen_ranked_leaderboard">
+
+        <action
+            android:id="@+id/transition_ranked_leaderboard_to_tracker"
+            app:destination="@+id/tracker_navigation_screen"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right">
+        </action>
+
+        <action
+            android:id="@+id/transition_ranked_leaderboard_to_configuration"
+            app:destination="@+id/configuration_navigation_screen"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left">
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/configuration_navigation_screen"
+        android:name="cdi.interfacedesign.lolrankedtracker.fragments.screens.ConfigurationScreen"
+        android:label="@string/configuration_title"
+        tools:layout="@layout/screen_player_match_history">
+
+        <action
+            android:id="@+id/transition_configuration_to_tracker"
+            app:destination="@+id/tracker_navigation_screen"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right">
+        </action>
+
+        <action
+            android:id="@+id/transition_configuration_to_ranked_leaderboard"
+            app:destination="@+id/ranked_leaderboard_navigation_screen"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right">
+        </action>
+
+    </fragment>
+
+</navigation>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
 import cdi.interfacedesign.lolrankedtracker.firebase.MyFirebase
 import com.google.android.material.appbar.MaterialToolbar
@@ -38,12 +39,13 @@ class AppToolbar: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         toolbar.setNavigationOnClickListener {
-            AppDrawer.get().OpenDrawer()
+            AppMainMenu.get().OpenDrawer()
         }
 
         toolbar.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId){
-                R.id.toolbat_exit_button -> {
+                R.id.toolbar_exit_button -> {
+                    MyApp.get().currentActivity.finish()
                     //throw RuntimeException("Test Crash") // Force a crash
                     MyFirebase.crashlytics.logSimpleError("Subnormal Error"){
                         key("Subnormal Name", "Abraham")

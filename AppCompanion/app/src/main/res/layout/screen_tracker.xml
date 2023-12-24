@@ -8,12 +8,13 @@
     android:orientation="vertical"
     tools:context=".activities.MainMenuActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lol_ranked_tracker"
@@ -26,9 +27,11 @@
         </TextView>
 
         <FrameLayout
+            android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_below="@+id/title"
             android:paddingHorizontal="@dimen/large">
 
             <ImageView
@@ -39,14 +42,15 @@
             </ImageView>
 
             <EditText
-                android:id="@+id/search_user"
+                android:id="@+id/search_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:layout_marginLeft="@dimen/medium"
+                android:layout_marginStart="@dimen/medium"
                 android:textColor="@color/base_grey"
-                android:textSize="@dimen/medium"
                 android:background="@color/fui_transparent"
+                android:textColorHint="@color/base_grey"
+                android:theme="@style/LolRankedTracker.TextView"
                 android:hint="@string/search_for_username">
 
             </EditText>
@@ -64,23 +68,25 @@
         </FrameLayout>
 
         <TextView
+            android:id="@+id/tracked"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/search"
             android:text="@string/tracked_players"
             android:layout_marginBottom="@dimen/large"
-            android:textSize="@dimen/medium"
             android:layout_marginHorizontal="@dimen/giant">
 
         </TextView>
 
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tracked_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tracked">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tracked_players"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        </androidx.recyclerview.widget.RecyclerView>
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
+
 
 </LinearLayout>

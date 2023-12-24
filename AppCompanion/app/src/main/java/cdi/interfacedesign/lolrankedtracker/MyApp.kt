@@ -14,6 +14,8 @@ class MyApp : Application() {
         public fun get() = instance
     }
 
+    lateinit var currentActivity: Activity
+
     override fun onCreate() {
         super.onCreate()
         instance = this
