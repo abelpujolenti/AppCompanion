@@ -7,14 +7,13 @@ class MyFirebase {
     companion object{
 
         lateinit var analytics: MyFirebaseAnalytics;
-        lateinit var authentication: MyFirebaseAuthentication;
+        val authentication = MyFirebaseAuthentication();
         val crashlytics = MyCrashlytics();
-        val dataBase = MyFirebaseDatBase();
+        val dataBase = MyFirebaseDataBase();
         val storage = MyFirebaseStorage();
 
         fun Init(appContext: Application){
             analytics = MyFirebaseAnalytics(appContext)
-            authentication = MyFirebaseAuthentication(appContext)
         }
 
     }

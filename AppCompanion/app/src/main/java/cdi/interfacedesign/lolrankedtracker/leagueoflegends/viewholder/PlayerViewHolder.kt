@@ -1,57 +1,99 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder
 
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.util.Log
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import cdi.interfacedesign.lolrankedtracker.R
+import cdi.interfacedesign.lolrankedtracker.firebase.MyFirebase
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
+import com.google.android.material.imageview.ShapeableImageView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.net.URI
+import java.net.URL
 
 class PlayerViewHolder(view: View, var player: PlayerData? = null) : ViewHolder(view) {
 
-    val playerId by lazy { view.findViewById<TextView>(R.id.id) }
-    val playerPuuid by lazy { view.findViewById<TextView>(R.id.puuid) }
-    val playerProfileIconId by lazy { view.findViewById<TextView>(R.id.profileIconId) }
-    val playerSummonerLevel by lazy { view.findViewById<TextView>(R.id.summonerLevel) }
+    val playerProfileIcon by lazy { view.findViewById<ShapeableImageView>(R.id.tracker_player_cell_profile_icon) }
+    val playerSummonerName by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_summoner_name) }
     val playerMatchesList by lazy { view.findViewById<TextView>(R.id.matches) }
-    val playerSoloTier by lazy { view.findViewById<TextView>(R.id.soloTier) }
-    val playerSoloRank by lazy { view.findViewById<TextView>(R.id.soloRank) }
-    val playerSolo by lazy { view.findViewById<TextView>(R.id.solo) }
-    val playerFlexTier by lazy { view.findViewById<TextView>(R.id.flexTier) }
-    val playerFlexRank by lazy { view.findViewById<TextView>(R.id.flexRank) }
-    val playerFlex by lazy { view.findViewById<TextView>(R.id.flex) }
+    val playerSoloTierIcon by lazy { view.findViewById<ShapeableImageView>(R.id.tracker_player_cell_tier_icon) }
+    val playerSoloTierRank by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_tier_rank) }
+    val playerSoloLeaguePoints by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_league_points) }
+    val discardButton by lazy { view.findViewById<ImageButton>(R.id.discard_button) }
 
     fun SetupWithPlayer(player: PlayerData){
-        playerId.text = player.id
-        playerPuuid.text = player.puuid
-        playerProfileIconId.text = player.profileIconId.toString()
-        playerSummonerLevel.text = player.summonerLevel.toString()
+
+        MyFirebase.storage.LoadImage("/profileIcon/${player.profileIconId}.png").downloadUrl
+            .addOnSuccessListener { uri ->
+                LoadIcon(playerProfileIcon, uri)
+            }
+
+        playerSummonerName.text = player.name
 
         player.leagueData?.get(0)?.let { leagueData ->
-
             leagueData.tier?.let { tier ->
-                playerSoloTier.text = tier
+
+                MyFirebase.storage.LoadImage("/tier/${tier}.png").downloadUrl
+                    .addOnSuccessListener { uri ->
+                        LoadIcon(playerSoloTierIcon, uri)
+                    }
+
+                leagueData.rank?.let { rank ->
+                    playerSoloTierRank.text = "$tier $rank"/*getString(R.string.tier_rank, tier, rank)*/
+                }
             }
 
-            leagueData.rank?.let { rank ->
-                playerSoloRank.text = rank
-            }
-            playerSolo.text = leagueData.leaguePoints.toString()
+            playerSoloLeaguePoints.text = leagueData.leaguePoints.toString() + " LP"
+        } ?: run{
+
+            /*val width = LinearLayout.LayoutParams.WRAP_CONTENT
+            val height = LinearLayout.LayoutParams.WRAP_CONTENT
+            var layoutParams = LinearLayout.LayoutParams(width, height, 0.9f)
+            playerSoloTierIcon.layoutParams = layoutParams
+
+            layoutParams = LinearLayout.LayoutParams(width, height, 0.1f)
+            playerSoloTierRank.layoutParams = layoutParams
+
+            layoutParams = LinearLayout.LayoutParams(width, height, 0f)
+            playerSoloLeaguePoints.layoutParams = layoutParams*/
+
+            MyFirebase.storage.LoadImage("/tier/UNRANKED.png").downloadUrl
+                .addOnSuccessListener { uri ->
+                    LoadIcon(playerSoloTierIcon, uri)
+                }
+
+            playerSoloTierRank.text = "UNRANKED"
+            playerSoloLeaguePoints.text = ""
         }
 
-        player.leagueData?.get(1)?.let { leagueData ->
-
-            leagueData.tier?.let { tier ->
-                playerFlexTier.text = tier
-            }
-
-            leagueData.rank?.let { rank ->
-                playerFlexRank.text = rank
-            }
-
-            playerFlex.text = leagueData.leaguePoints.toString()
+        discardButton.setOnClickListener {
+            //TODO Discard
         }
 
         this.player = player
+    }
+
+    private fun LoadIcon(image: ShapeableImageView, uri: Uri){
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val stream = withContext(Dispatchers.IO){
+                URL(uri.toString()).openStream()
+            }
+            val profileIconBitMap = BitmapFactory.decodeStream(stream)
+
+            CoroutineScope(Dispatchers.Main).launch {
+                image.setImageBitmap(profileIconBitMap)
+                image.visibility = View.VISIBLE
+            }
+        }
     }
 
 

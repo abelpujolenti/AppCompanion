@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    tools:context=".activities.MainMenuActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lol_ranked_tracker"
+            android:gravity="center"
+            android:textColor="@color/yellow_medium"
+            android:textSize="@dimen/large"
+            android:layout_margin="@dimen/margin_normal"
+            android:orientation="vertical">
+
+        </TextView>
+
+        <FrameLayout
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/title"
+            android:paddingHorizontal="@dimen/large">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/search_box">
+            </ImageView>
+
+            <EditText
+                android:id="@+id/search_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="@dimen/medium"
+                android:textColor="@color/base_grey"
+                android:background="@color/fui_transparent"
+                android:textColorHint="@color/base_grey"
+                android:theme="@style/LolRankedTracker.TextView"
+                android:hint="@string/search_for_username">
+
+            </EditText>
+
+            <ImageButton
+                android:id="@+id/add_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/medium"
+                android:layout_gravity="end"
+                android:background="@color/fui_transparent"
+                android:src="@drawable/add_button">
+            </ImageButton>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tracked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search"
+            android:text="@string/tracked_players"
+            android:layout_marginBottom="@dimen/large"
+            android:layout_marginHorizontal="@dimen/giant">
+
+        </TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tracked_players"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tracked">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

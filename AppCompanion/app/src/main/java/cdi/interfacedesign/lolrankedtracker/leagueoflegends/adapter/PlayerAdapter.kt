@@ -1,5 +1,6 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import cdi.interfacedesign.lolrankedtracker.R
 import cdi.interfacedesign.lolrankedtracker.activities.MainMenuActivity
+import cdi.interfacedesign.lolrankedtracker.activities.TrackedPlayerActivity
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder.PlayerViewHolder
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.provider.PlayerProvider
@@ -15,22 +17,18 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PlayerAdapter(private val repository: LeagueOfLegendsRepository,
-                    private val paginationSize: Int = 20) : Adapter<PlayerViewHolder>() {
+class PlayerAdapter(private val repository: LeagueOfLegendsRepository) : Adapter<PlayerViewHolder>() {
 
     private val provider: PlayerProvider = PlayerProvider(repository)
     private var playerList: MutableList<PlayerData> = mutableListOf()
     private var requestingData = false;
 
-    init {
-        GetMoreData()
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val viewHolder = PlayerViewHolder(layoutInflater.inflate(R.layout.test_screen_2, parent, false))
+        val viewHolder = PlayerViewHolder(layoutInflater.inflate(R.layout.cell_tracker, parent, false))
         viewHolder.itemView.setOnClickListener{
-            val intent = Intent(parent.context, MainMenuActivity::class.java)
-            //intent.putExtra("Player", viewHolder.player)
+            val intent = Intent(parent.context, TrackedPlayerActivity::class.java)
+            intent.putExtra("Player", viewHolder.player)
             parent.context.startActivity(intent)
         }
         return viewHolder
@@ -42,7 +40,7 @@ class PlayerAdapter(private val repository: LeagueOfLegendsRepository,
         holder.SetupWithPlayer(playerList[position])
     }
 
-    fun GetMoreData(){
+    fun LoadPlayerData(summonerName: String){
 
         if (requestingData)
         {
@@ -53,18 +51,22 @@ class PlayerAdapter(private val repository: LeagueOfLegendsRepository,
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            val player: PlayerData? = provider.GetPaginatedPlayer("Briαr Lσver")
+            val player: PlayerData? = provider.GetPaginatedPlayer(summonerName)
 
             CoroutineScope(Dispatchers.Main).launch {
 
                 if (player != null) {
-                    playerList.add(player)
+                    for( i in 0..<playerList.size){
+                        if (playerList[i].name == player.name){
+                            playerList.removeAt(i)
+                            break
+                        }
+                    }
+                    playerList.add(0, player)
                     notifyDataSetChanged()
                 }
                 requestingData = false
             }
-
         }
-
     }
 }

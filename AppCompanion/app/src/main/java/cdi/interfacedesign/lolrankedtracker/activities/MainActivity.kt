@@ -1,29 +1,25 @@
 package cdi.interfacedesign.lolrankedtracker.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.EditText
+import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppToolbar
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.PlayerAdapter
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsApiRepository
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsMockRepository
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsSharedDataBase
 
 class MainActivity : AppCompatActivity() {
 
-    val table by lazy { findViewById<RecyclerView>(R.id.myHeroesTable) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.test_screen)
+        setContentView(R.layout.screen_main_menu)
 
-        table.layoutManager = LinearLayoutManager(this)
-
-        //val repository = LeagueOfLegendsSharedDataBase()
-        //val repository = LeagueOfLegendsMockRepository();
-        val repository = LeagueOfLegendsApiRepository();
-
-        table.adapter = PlayerAdapter(repository)
-
+        MyApp.get().currentActivity = this
     }
 }

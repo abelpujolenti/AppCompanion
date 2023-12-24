@@ -2,10 +2,10 @@
 <resources>
 
     <!-- Base Values -->
-    <dimen name="minimum">1dp</dimen>
-    <dimen name="tiny">4dp</dimen>
-    <dimen name="small">8dp</dimen>
-    <dimen name="medium">16dp</dimen>
+    <dimen name="minimum">4dp</dimen>
+    <dimen name="tiny">8dp</dimen>
+    <dimen name="small">16dp</dimen>
+    <dimen name="medium">24dp</dimen>
     <dimen name="large">32dp</dimen>
     <dimen name="giant">48dp</dimen>
 
