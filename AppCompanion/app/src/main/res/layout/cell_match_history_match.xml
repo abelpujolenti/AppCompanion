@@ -11,21 +11,20 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="@dimen/giant"
+        android:layout_margin="@dimen/small"
+        card_view:cardCornerRadius="@dimen/large"
         card_view:cardBackgroundColor="@color/blue_dark">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_marginHorizontal="@dimen/large"
-            android:layout_marginVertical="@dimen/large">
+            android:layout_margin="@dimen/small">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/small">
+                android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/player_match_history_cell_queue_type"
@@ -76,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small"
-                app:srcCompat="@drawable/ic_launcher_background">
+                app:srcCompat="@drawable/match_history_icon">
 
             </com.google.android.material.imageview.ShapeableImageView>
 
@@ -84,16 +83,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/small">
+                android:orientation="vertical">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/player_champions_cell_summoner_id_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="@dimen/small"
-                    app:srcCompat="@drawable/ic_launcher_background">
+                    app:srcCompat="@drawable/match_history_icon">
 
                 </com.google.android.material.imageview.ShapeableImageView>
 
@@ -103,8 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/beaufort_regular"
-                    android:layout_margin="@dimen/small"
-                    app:srcCompat="@drawable/ic_launcher_background">
+                    app:srcCompat="@drawable/match_history_icon">
 
                 </com.google.android.material.imageview.ShapeableImageView>
 
@@ -114,16 +110,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/small">
+                android:orientation="vertical">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/player_champions_cell_perk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="@dimen/small"
-                    app:srcCompat="@drawable/ic_launcher_background">
+                    app:srcCompat="@drawable/match_history_icon">
 
                 </com.google.android.material.imageview.ShapeableImageView>
 
@@ -133,8 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/beaufort_regular"
-                    android:layout_margin="@dimen/small"
-                    app:srcCompat="@drawable/ic_launcher_background">
+                    app:srcCompat="@drawable/match_history_icon">
 
                 </com.google.android.material.imageview.ShapeableImageView>
 
@@ -143,8 +136,7 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/player_champions_cell_item0"
@@ -152,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/small"
-                    app:srcCompat="@drawable/ic_launcher_background">
+                    app:srcCompat="@drawable/match_history_icon">
 
                 </com.google.android.material.imageview.ShapeableImageView>
 
@@ -163,7 +155,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/beaufort_regular"
                     android:layout_margin="@dimen/small"
-                    app:srcCompat="@drawable/ic_launcher_background">
+                    app:srcCompat="@drawable/match_history_icon">
 
                 </com.google.android.material.imageview.ShapeableImageView>
 
@@ -173,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/small"
-                    app:srcCompat="@drawable/ic_launcher_background">
+                    app:srcCompat="@drawable/match_history_icon">
 
                 </com.google.android.material.imageview.ShapeableImageView>
 
@@ -184,7 +176,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/beaufort_regular"
                     android:layout_margin="@dimen/small"
-                    app:srcCompat="@drawable/ic_launcher_background">
+                    app:srcCompat="@drawable/match_history_icon">
 
                 </com.google.android.material.imageview.ShapeableImageView>
 
@@ -194,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/small"
-                    app:srcCompat="@drawable/ic_launcher_background">
+                    app:srcCompat="@drawable/match_history_icon">
 
                 </com.google.android.material.imageview.ShapeableImageView>
 
@@ -205,7 +197,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="@font/beaufort_regular"
                     android:layout_margin="@dimen/small"
-                    app:srcCompat="@drawable/ic_launcher_background">
+                    app:srcCompat="@drawable/match_history_icon">
 
                 </com.google.android.material.imageview.ShapeableImageView>
 

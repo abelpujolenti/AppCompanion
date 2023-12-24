@@ -45,5 +45,12 @@
     <string name="login_error">Error on try to log in</string>
     <string name="tier_rank">%s %s</string>
     <string name="configuration_title">Configuration</string>
+    <string name="victory">Victory</string>
+    <string name="defeat">Defeat</string>
+    <string name="ranked_flex">Ranked Flex</string>
+    <string name="aram">Aram</string>
+    <string name="draft">Draft</string>
+    <string name="blind">Blind</string>
+    <string name="minutes_seconds">%sm %ss</string>
 
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:layout_marginTop="@dimen/large">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/player_profile_profile_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:background="@drawable/champions_icon_border"
             android:foreground="@drawable/exit_button">
-        </ImageView>
+        </com.google.android.material.imageview.ShapeableImageView>
 
         <TextView
             android:id="@+id/player_profile_summoner_name"
@@ -45,7 +45,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ranked_cells"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">

@@ -83,7 +83,7 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
 
     override suspend fun GetPlayerProfile(summonerName: String): PlayerData?{
 
-        val responseProfile = ApiPlatformService.GetProfile(summonerName = summonerName)
+        val responseProfile = ApiPlatformService.GetProfile(summonerName)
 
         if (!responseProfile.isSuccessful){
             return null

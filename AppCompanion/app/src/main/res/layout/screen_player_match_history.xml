@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:layout_marginTop="@dimen/large">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/player_match_history_profile_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:background="@drawable/champions_icon_border"
             android:foreground="@drawable/exit_button">
-        </ImageView>
+        </com.google.android.material.imageview.ShapeableImageView>
 
         <TextView
             android:id="@+id/player_match_history_summoner_name"
@@ -34,12 +34,12 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/champion_cells"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/match_history_cells"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </LinearLayout>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

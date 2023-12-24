@@ -1,9 +1,7 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -16,10 +14,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.net.URI
 import java.net.URL
 
-class PlayerViewHolder(view: View, var player: PlayerData? = null) : ViewHolder(view) {
+class TrackedPlayerViewHolder(view: View, var player: PlayerData? = null) : ViewHolder(view) {
 
     val playerProfileIcon by lazy { view.findViewById<ShapeableImageView>(R.id.tracker_player_cell_profile_icon) }
     val playerSummonerName by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_summoner_name) }
@@ -29,7 +26,7 @@ class PlayerViewHolder(view: View, var player: PlayerData? = null) : ViewHolder(
     val playerSoloLeaguePoints by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_league_points) }
     val discardButton by lazy { view.findViewById<ImageButton>(R.id.discard_button) }
 
-    fun SetupWithPlayer(player: PlayerData){
+    fun SetupWithTrackedPlayer(player: PlayerData){
 
         MyFirebase.storage.LoadImage("/profileIcon/${player.profileIconId}.png").downloadUrl
             .addOnSuccessListener { uri ->
@@ -95,6 +92,4 @@ class PlayerViewHolder(view: View, var player: PlayerData? = null) : ViewHolder(
             }
         }
     }
-
-
 }

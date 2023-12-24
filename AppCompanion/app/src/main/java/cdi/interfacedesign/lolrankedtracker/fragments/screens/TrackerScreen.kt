@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.PlayerAdapter
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.TrackedPlayerAdapter
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsApiRepository
 
 class TrackerScreen : Fragment() {
@@ -28,7 +28,7 @@ class TrackerScreen : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentView = inflater.inflate(R.layout.screen_tracker, container, false)
         return fragmentView
     }
@@ -42,14 +42,13 @@ class TrackerScreen : Fragment() {
         //val repository = LeagueOfLegendsMockRepository();
         val repository = LeagueOfLegendsApiRepository();
 
-        val playerAdapter = PlayerAdapter(repository)
+        val trackedPlayerAdapter = TrackedPlayerAdapter(repository)
 
-        table.adapter = playerAdapter
+        table.adapter = trackedPlayerAdapter
 
         addButton.setOnClickListener {
-            playerAdapter.LoadPlayerData(searchBox.text.toString())
+            trackedPlayerAdapter.LoadPlayerData(searchBox.text.toString())
             searchBox.text.clear()
         }
-
     }
 }

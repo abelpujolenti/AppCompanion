@@ -5,21 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageButton
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
 import cdi.interfacedesign.lolrankedtracker.fragments.screens.ConfigurationScreen
 import cdi.interfacedesign.lolrankedtracker.fragments.screens.LeaderBoardScreen
 import cdi.interfacedesign.lolrankedtracker.fragments.screens.LoginScreen
 import cdi.interfacedesign.lolrankedtracker.fragments.screens.TrackerScreen
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.PlayerAdapter
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsApiRepository
 import com.google.android.material.navigation.NavigationView
 
 class AppMainMenu : Fragment(), DrawerListener {
