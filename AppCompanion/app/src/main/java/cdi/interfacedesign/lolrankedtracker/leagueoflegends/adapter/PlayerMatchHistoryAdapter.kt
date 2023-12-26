@@ -12,14 +12,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PlayerMatchHistoryAdapter(repository: LeagueOfLegendsRepository, private val paginationSize: Int = 10) : Adapter<PlayerMatchHistoryViewHolder>() {
+class PlayerMatchHistoryAdapter(repository: LeagueOfLegendsRepository, private val puuid: String,
+                                private val paginationSize: Int = 10) : Adapter<PlayerMatchHistoryViewHolder>() {
 
     private val provider: PlayerMatchHistoryProvider = PlayerMatchHistoryProvider(repository)
     private var matchList: MutableList<MatchData> = mutableListOf()
     private var requestingData = false;
 
     init {
-        LoadMatchData("gwNEg_6nEmn30549HZlzEWlpGSo7xLa8qLj-_dPh5PLkBJ7PLmbxy-MgK952EJM1xtd5Z1jpzniogQ")
+        LoadMatchData(puuid)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerMatchHistoryViewHolder {
@@ -33,7 +34,7 @@ class PlayerMatchHistoryAdapter(repository: LeagueOfLegendsRepository, private v
         holder.SetupWithPlayerMatch(matchList[position])
 
         if (position >= matchList.size - paginationSize){
-            LoadMatchData("gwNEg_6nEmn30549HZlzEWlpGSo7xLa8qLj-_dPh5PLkBJ7PLmbxy-MgK952EJM1xtd5Z1jpzniogQ")
+            LoadMatchData(puuid)
         }
     }
 
@@ -50,16 +51,21 @@ class PlayerMatchHistoryAdapter(repository: LeagueOfLegendsRepository, private v
 
             val matchesId: List<String> = provider.GetPaginatedMatches(puuid, matchList.size, paginationSize)
 
-            val matches: MutableList<MatchData?> = mutableListOf()
-
-            for (matchId in matchesId){
-                matches.add(provider.GetMatch(puuid, matchId))
-            }
-
             CoroutineScope(Dispatchers.Main).launch {
 
+                val matches: MutableList<MatchData?> = mutableListOf()
+
+                for (matchId in matchesId){
+                    matches.add(provider.GetMatch(puuid, matchId))
+                }
+
                 for (match in matches){
-                    if (match != null)
+                    if (match != null &&
+                        (match.queueId == 420 ||
+                        match.queueId == 440 ||
+                        match.queueId == 450 ||
+                        match.queueId == 400 ||
+                        match.queueId == 430))
                     {
                         matchList.add(match)
                         notifyDataSetChanged()

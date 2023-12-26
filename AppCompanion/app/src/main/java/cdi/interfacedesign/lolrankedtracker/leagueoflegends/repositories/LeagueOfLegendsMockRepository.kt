@@ -10,7 +10,7 @@ class LeagueOfLegendsMockRepository : LeagueOfLegendsRepository {
     {
 
         private val playersListHardcoded = mutableListOf<PlayerData>(
-            PlayerData("1", "2", "abel", 33, 618)
+
         )
 
     }

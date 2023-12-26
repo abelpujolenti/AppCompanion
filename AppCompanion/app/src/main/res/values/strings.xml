@@ -33,7 +33,7 @@
 
     <!--Leaderboard-->
     <string name="ranked_leaderboard_title">Ranked Leaderboard</string>
-    <string name="ranked_solo">Ranked Solo</string>
+    <string name="ranked_solo_mode">Ranked Solo</string>
 
     <!--Bottom Bar-->
     <string name="player_profile_button">Profile</string>
@@ -47,10 +47,10 @@
     <string name="configuration_title">Configuration</string>
     <string name="victory">Victory</string>
     <string name="defeat">Defeat</string>
-    <string name="ranked_flex">Ranked Flex</string>
-    <string name="aram">Aram</string>
-    <string name="draft">Draft</string>
-    <string name="blind">Blind</string>
+    <string name="ranked_flex_mode">Ranked Flex</string>
+    <string name="aram_mode">Aram</string>
+    <string name="draft_mode">Draft</string>
+    <string name="blind_mode">Blind</string>
     <string name="minutes_seconds">%sm %ss</string>
 
 </resources>

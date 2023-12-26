@@ -34,7 +34,7 @@ class MatchHistoryScreen : Fragment() {
         //val repository = LeagueOfLegendsMockRepository();
         val repository = LeagueOfLegendsApiRepository();
 
-        val playerMatchHistoryAdapter = PlayerMatchHistoryAdapter(repository)
+        val playerMatchHistoryAdapter = PlayerMatchHistoryAdapter(repository, MyApp.get().player.puuid)
 
         table.adapter = playerMatchHistoryAdapter
     }

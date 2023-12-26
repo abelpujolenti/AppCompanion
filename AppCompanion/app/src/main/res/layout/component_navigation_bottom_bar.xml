@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app_bottombar"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -18,12 +19,76 @@
             tools:layout="@layout/component_toolbar">
         </androidx.fragment.app.FragmentContainerView>
 
+        <LinearLayout
+            android:id="@+id/tracked_player_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/component_toolbar_container"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profile_icon_constraint_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/background_profile_icon"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="@dimen/small"
+                    android:background="@drawable/champions_icon_border"
+                    app:layout_constraintLeft_toLeftOf="@id/profile_icon_constraint_layout"
+                    app:layout_constraintRight_toRightOf="@id/profile_icon_constraint_layout"
+                    app:layout_constraintTop_toTopOf="@id/profile_icon_constraint_layout"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_icon_constraint_layout"
+                    app:shapeAppearanceOverlay="@style/CircleImage">
+                </com.google.android.material.imageview.ShapeableImageView>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/player_profile_icon"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    app:layout_constraintLeft_toLeftOf="@id/background_profile_icon"
+                    app:layout_constraintRight_toRightOf="@id/background_profile_icon"
+                    app:layout_constraintTop_toTopOf="@id/background_profile_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/background_profile_icon"
+                    tools:background="@drawable/champions_icon_border"
+                    app:shapeAppearanceOverlay="@style/CircleImage">
+                </com.google.android.material.imageview.ShapeableImageView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/player_profile_summoner_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="G2 Caps"
+                android:textColor="@color/base_light"
+                android:textSize="@dimen/large">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/player_profile_summoner_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Level 840"
+                android:textColor="@color/cyan"
+                android:layout_marginBottom="@dimen/medium">
+
+            </TextView>
+
+        </LinearLayout>
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/component_navigation_host_container"
             android:name="cdi.interfacedesign.lolrankedtracker.fragments.components.AppNavigationHost"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/component_toolbar_container"
+            android:layout_below="@id/tracked_player_header"
             android:layout_above="@+id/component_navigation_bottom_bar_container"
             tools:layout="@layout/component_navigation_host">
 

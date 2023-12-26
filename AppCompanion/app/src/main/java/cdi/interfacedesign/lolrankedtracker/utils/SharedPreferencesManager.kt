@@ -32,6 +32,4 @@ object SharedPreferencesManager {
             editor.putString(PLAYER_KEY, jsonString)
             editor.apply()
         }
-
-
 }

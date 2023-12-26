@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
 import cdi.interfacedesign.lolrankedtracker.activities.TrackedPlayerActivity
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder.TrackedPlayerViewHolder
@@ -24,6 +25,7 @@ class TrackedPlayerAdapter(repository: LeagueOfLegendsRepository) : Adapter<Trac
         val layoutInflater = LayoutInflater.from(parent.context)
         val viewHolder = TrackedPlayerViewHolder(layoutInflater.inflate(R.layout.cell_tracker, parent, false))
         viewHolder.itemView.setOnClickListener{
+            MyApp.get().player = viewHolder.player!!
             val intent = Intent(parent.context, TrackedPlayerActivity::class.java)
             intent.putExtra("Player", viewHolder.player)
             parent.context.startActivity(intent)

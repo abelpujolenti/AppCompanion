@@ -5,35 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/large">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/player_match_history_profile_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/small"
-            android:layout_gravity="center"
-            android:background="@drawable/champions_icon_border"
-            android:foreground="@drawable/exit_button">
-        </com.google.android.material.imageview.ShapeableImageView>
-
-        <TextView
-            android:id="@+id/player_match_history_summoner_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="G2 Caps"
-            android:textColor="@color/base_light"
-            android:textSize="@dimen/large">
-
-        </TextView>
-
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/match_history_cells"
         android:layout_width="match_parent"

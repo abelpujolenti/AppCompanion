@@ -20,6 +20,7 @@ import retrofit2.http.Query
 class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
 
     val RANKED_SOLO = "RANKED_SOLO_5x5"
+    val RANKED_FLEX = "RANKED_FLEX_SR"
 
     companion object{
         const val API_KEY = "RGAPI-fca3bae3-c616-4228-bf6c-768f4ecfc22f"
@@ -93,9 +94,9 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
             return null
         }
 
-        val puuid: String = response.puuid
-
         val id: String = response.id
+
+        val puuid: String = response.puuid
 
         val name: String = response.name
 
@@ -112,7 +113,7 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         val leagueData = GetLeague(id);
 
         if (leagueData.isEmpty()){
-            return null
+            return PlayerData(id, puuid, name, profileIconId, summonerLevel, matchesList)
         }
 
         val leaguesData = FillLeagueData(leagueData)
@@ -138,10 +139,11 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
             if (leagueQueueType == RANKED_SOLO)
             {
                 leaguesData[0] = leagueData
-                continue
             }
-
-            leaguesData[1] = leagueData
+            else if (leagueQueueType == RANKED_FLEX)
+            {
+                leaguesData[1] = leagueData
+            }
         }
 
         return leaguesData;
@@ -161,15 +163,13 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         }
 
         return leagueData
-
     }
 
     override suspend fun GetMatchesList(puuid: String, start: Int, count: Int): List<String> {
 
-        val responseMatchesList = ApiRegionalService.GetMatchList(puuid = puuid, start = 0, count = 20)
+        val responseMatchesList = ApiRegionalService.GetMatchList(puuid, start, count)
 
         if (!responseMatchesList.isSuccessful){
-
             return emptyList<String>();
         }
 
@@ -229,22 +229,13 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
 
         val perk = participant.perks.styles[0].selections[0].perk
 
-        val style = participant.perks.styles[1].style
+        val styles: List<Int> = listOf(participant.perks.styles[0].style, participant.perks.styles[1].style)
 
-        val item0 = participant.item0
-
-        val item1 = participant.item1
-
-        val item2 = participant.item2
-
-        val item3 = participant.item3
-
-        val item4 = participant.item4
-
-        val item5 = participant.item5
+        val items: List<Int> = listOf(participant.item0, participant.item1, participant.item2,
+            participant.item3, participant.item4, participant.item5)
 
         return MatchData(queueId, win, gameDuration, gameStartTimestamp, gameEndTimestamp, championName,
-            summoner1Id, summoner2Id, perk, style, item0, item1, item2, item3, item4, item5)
+            summoner1Id, summoner2Id, perk, styles, items)
 
     }
 

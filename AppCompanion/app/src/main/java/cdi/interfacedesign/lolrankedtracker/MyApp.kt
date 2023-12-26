@@ -5,6 +5,7 @@ import android.app.Application
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import cdi.interfacedesign.lolrankedtracker.firebase.MyFirebase
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 
 class MyApp : Application() {
 
@@ -15,6 +16,7 @@ class MyApp : Application() {
     }
 
     lateinit var currentActivity: Activity
+    lateinit var player: PlayerData
 
     override fun onCreate() {
         super.onCreate()

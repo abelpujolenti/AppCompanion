@@ -38,11 +38,11 @@ class PlayerMatchHistoryViewHolder(view: View, var match: MatchData? = null) : V
     fun SetupWithPlayerMatch(match: MatchData){
 
         when(match.queueId){
-            420 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.ranked_solo)
-            440 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.ranked_flex)
-            450 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.aram)
-            400 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.draft)
-            430 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.blind)
+            420 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.ranked_solo_mode)
+            440 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.ranked_flex_mode)
+            450 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.aram_mode)
+            400 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.draft_mode)
+            430 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.blind_mode)
         }
 
         when(match.win){
@@ -67,52 +67,55 @@ class PlayerMatchHistoryViewHolder(view: View, var match: MatchData? = null) : V
                 LoadIcon(championPhoto, uri)
             }
 
-        MyFirebase.storage.LoadImage("/spell/${match.summoner1Id}.png").downloadUrl
+
+
+        MyFirebase.storage.LoadImage("/spell/${SummonerIdToSummonerSpellName(match.summoner1Id)}.png").downloadUrl
             .addOnSuccessListener { uri ->
                 LoadIcon(summoner1, uri)
             }
 
-        MyFirebase.storage.LoadImage("/spell/${match.summoner2Id}.png").downloadUrl
+        MyFirebase.storage.LoadImage("/spell/${SummonerIdToSummonerSpellName(match.summoner2Id)}.png").downloadUrl
             .addOnSuccessListener { uri ->
                 LoadIcon(summoner2, uri)
             }
 
-        MyFirebase.storage.LoadImage("/runes/primaryRunes/${match.perk}.png").downloadUrl
+        MyFirebase.storage.LoadImage("/runes/primaryRunes/${StyleIdToStyleName(match.style[0])}/${PerkIdToPerkName(match.perk)}.png").downloadUrl
             .addOnSuccessListener { uri ->
                 LoadIcon(perk, uri)
             }
 
-        MyFirebase.storage.LoadImage("/runes/secondaryRunes/${match.style}.png").downloadUrl
+
+        MyFirebase.storage.LoadImage("/runes/secondaryRunes/${StyleIdToStyleName(match.style[1])}.png").downloadUrl
             .addOnSuccessListener { uri ->
                 LoadIcon(style, uri)
             }
 
-        MyFirebase.storage.LoadImage("/item/${match.item0}.png").downloadUrl
+        MyFirebase.storage.LoadImage("/item/${match.items[0]}.png").downloadUrl
             .addOnSuccessListener { uri ->
                 LoadIcon(item0, uri)
             }
 
-        MyFirebase.storage.LoadImage("/item/${match.item1}.png").downloadUrl
+        MyFirebase.storage.LoadImage("/item/${match.items[1]}.png").downloadUrl
             .addOnSuccessListener { uri ->
                 LoadIcon(item1, uri)
             }
 
-        MyFirebase.storage.LoadImage("/item/${match.item2}.png").downloadUrl
+        MyFirebase.storage.LoadImage("/item/${match.items[2]}.png").downloadUrl
             .addOnSuccessListener { uri ->
                 LoadIcon(item2, uri)
             }
 
-        MyFirebase.storage.LoadImage("/item/${match.item3}.png").downloadUrl
+        MyFirebase.storage.LoadImage("/item/${match.items[3]}.png").downloadUrl
             .addOnSuccessListener { uri ->
                 LoadIcon(item3, uri)
             }
 
-        MyFirebase.storage.LoadImage("/item/${match.item4}.png").downloadUrl
+        MyFirebase.storage.LoadImage("/item/${match.items[4]}.png").downloadUrl
             .addOnSuccessListener { uri ->
                 LoadIcon(item4, uri)
             }
 
-        MyFirebase.storage.LoadImage("/item/${match.item5}.png").downloadUrl
+        MyFirebase.storage.LoadImage("/item/${match.items[5]}.png").downloadUrl
             .addOnSuccessListener { uri ->
                 LoadIcon(item5, uri)
             }
@@ -165,7 +168,68 @@ class PlayerMatchHistoryViewHolder(view: View, var match: MatchData? = null) : V
         timeAgo.text = "${time/60} seconds"
     }
 
+    private fun SummonerIdToSummonerSpellName(summonerId: Int): String{
 
+        var spellName= "Summoner"
+
+        when(summonerId){
+            21 -> spellName += "Barrier"
+            1 -> spellName += "Boost"
+            14 -> spellName += "Dot"
+            3 -> spellName += "Exhaust"
+            4 -> spellName += "Flash"
+            6 -> spellName += "Haste"
+            7 -> spellName += "Heal"
+            13 -> spellName += "Mana"
+            11 -> spellName += "Smite"
+            32 -> spellName += "Snowball"
+            12 -> spellName += "Teleport"
+        }
+
+        return spellName
+    }
+
+    private fun StyleIdToStyleName(styleId: Int): String{
+
+        lateinit var styleName: String
+
+        when(styleId){
+            8100 -> styleName = "Domination"
+            8300 -> styleName = "Inspiration"
+            8000 -> styleName = "Precision"
+            8400 -> styleName = "Resolve"
+            8200 -> styleName = "Sorcery"
+        }
+
+        return styleName
+    }
+
+    private fun PerkIdToPerkName(perkId: Int): String{
+
+        lateinit var perkName: String
+
+        when(perkId){
+            8112 -> perkName = "Electrocute"
+            8124 -> perkName = "Predator"
+            8128 -> perkName = "DarkHarvest"
+            9923 -> perkName = "HailOfBlades"
+            8351 -> perkName = "GlacialAugment"
+            8360 -> perkName = "UnsealedSpellbook"
+            8369 -> perkName = "FirstStrike"
+            8005 -> perkName = "PressTheAttack"
+            8008 -> perkName = "LethalTempo"
+            8021 -> perkName = "FleetFootwork"
+            8010 -> perkName = "Conqueror"
+            8437 -> perkName = "GraspOfTheUndying"
+            8439 -> perkName = "Aftershock"
+            8465 -> perkName = "Guardian"
+            8214 -> perkName = "SummonAery"
+            8229 -> perkName = "ArcaneComet"
+            8230 -> perkName = "PhaseRush"
+        }
+
+        return perkName
+    }
 
     private fun LoadIcon(image: ShapeableImageView, uri: Uri){
 
