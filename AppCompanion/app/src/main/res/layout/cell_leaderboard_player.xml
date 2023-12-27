@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_margin="@dimen/small"
+        android:layout_marginVertical="@dimen/tiny"
         app:cardCornerRadius="@dimen/large"
         app:cardBackgroundColor="@color/blue_dark">
 
@@ -29,7 +29,7 @@
                 android:layout_weight="1">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/tracker_player_cell_profile_icon"
+                    android:id="@+id/leaderboard_player_cell_profile_icon"
                     android:layout_width="67dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -40,10 +40,11 @@
                 </com.google.android.material.imageview.ShapeableImageView>
 
                 <TextView
-                    android:id="@+id/tracker_player_cell_summoner_name"
+                    android:id="@+id/leaderboard_player_cell_summoner_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="@dimen/small"
                     tool:text="G2 Caps">
                 </TextView>
 
@@ -53,55 +54,48 @@
                 android:id="@+id/player_tier_info"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/tracker_player_cell_tier_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.8"
-                    tool:src="@drawable/profile_icon">
-                </com.google.android.material.imageview.ShapeableImageView>
-
-                <TextView
-                    android:id="@+id/tracker_player_cell_tier_rank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textSize="@dimen/small"
-                    android:layout_weight="0.1"
-                    tool:text="Challenger">
-                </TextView>
+                android:layout_marginStart="@dimen/tiny"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tracker_player_cell_league_points"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:gravity="center"
+                    android:layout_gravity="center"
                     android:layout_weight="0.1"
-                    android:textSize="@dimen/small"
+                    android:textColor="@color/yellow_medium"
+                    android:textSize="20dp"
                     tool:text="1127 LP">
                 </TextView>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/tiny"
-                android:gravity="center">
-
-                <ImageButton
-                    android:id="@+id/discard_button"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/fui_transparent"
-                    android:src="@drawable/discard_button">
-                </ImageButton>
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/tiny"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/leaderboard_player_wins_losses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/small"
+                        tool:text="57W 30L">
+
+                    </TextView>
+
+
+                    <TextView
+                        android:id="@+id/leaderboard_player_win_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/small"
+                        tool:text="65.5% WR">
+
+                    </TextView>
+
+                </LinearLayout>
 
             </LinearLayout>
 

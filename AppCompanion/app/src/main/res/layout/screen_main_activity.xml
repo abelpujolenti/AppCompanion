@@ -26,7 +26,6 @@
         android:id="@+id/login_google_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_normal"
         android:layout_gravity="center">
 
     </com.google.android.gms.common.SignInButton>

@@ -9,7 +9,7 @@ class MainMenuActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.screen_tracker)
+        setContentView(R.layout.screen_main_menu)
 
         MyApp.get().currentActivity = this
 

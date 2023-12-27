@@ -1,5 +1,6 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories
 
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.LeaderboardPlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.MatchData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.LeagueResponse
@@ -43,7 +44,12 @@ class LeagueOfLegendsMockRepository : LeagueOfLegendsRepository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun GetLeaderboard(offset: Int, limit: Int): MutableList<PlayerData> {
+    override suspend fun GetLeaderboard(
+        queue: String,
+        tier: String,
+        rank: String,
+        page: Int
+    ): List<LeaderboardPlayerData> {
         TODO("Not yet implemented")
     }
 }

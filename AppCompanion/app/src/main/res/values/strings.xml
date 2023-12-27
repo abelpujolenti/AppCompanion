@@ -53,4 +53,34 @@
     <string name="blind_mode">Blind</string>
     <string name="minutes_seconds">%sm %ss</string>
 
+    <!--Spinners-->
+
+    <string name="queue_types">Queue Types</string>
+    <string-array name="QueueType">
+        <item>Ranked Solo/Duo</item>
+        <item>Ranked Flex</item>
+    </string-array>
+
+    <string name="tiers">Tiers</string>
+    <string-array name="Tiers">
+        <item>Challenger</item>
+        <item>Grand Master</item>
+        <item>Master</item>
+        <item>Diamond</item>
+        <item>Emerald</item>
+        <item>Platinum</item>
+        <item>Gold</item>
+        <item>Silver</item>
+        <item>Bronze</item>
+        <item>Iron</item>
+    </string-array>
+
+    <string name="ranks">Ranks</string>
+    <string-array name="Ranks">
+        <item>I</item>
+        <item>II</item>
+        <item>III</item>
+        <item>IV</item>
+    </string-array>
+
 </resources>

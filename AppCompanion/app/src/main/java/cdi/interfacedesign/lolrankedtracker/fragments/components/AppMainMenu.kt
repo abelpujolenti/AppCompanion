@@ -69,7 +69,6 @@ class AppMainMenu : Fragment(), DrawerListener {
             drawer.close()
             true
         }
-        //navigationDrawer.menu.getItem(0).itemId
     }
 
     fun ReplaceScreen(screen: Fragment, start: Boolean){

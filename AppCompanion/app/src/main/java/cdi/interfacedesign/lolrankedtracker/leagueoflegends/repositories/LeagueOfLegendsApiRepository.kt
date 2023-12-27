@@ -1,6 +1,7 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories
 
 import cdi.interfacedesign.lolrankedtracker.interceptors.HeaderInterceptor
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.LeaderboardPlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.LeagueData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.MatchData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
@@ -239,8 +240,39 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
 
     }
 
-    override suspend fun GetLeaderboard(offset: Int, limit: Int): MutableList<PlayerData> {
-        TODO("Not yet implemented")
+    override suspend fun GetLeaderboard(queue: String, tier: String, rank: String, page: Int)
+        : List<LeaderboardPlayerData> {
+
+        val responseLeaderboard = ApiPlatformService.GetLeaderboard(queue, tier, rank, page)
+
+        if (!responseLeaderboard.isSuccessful){
+            return emptyList<LeaderboardPlayerData>();
+        }
+
+        val leaderboardResponseList = responseLeaderboard.body()?: run{
+            return emptyList<LeaderboardPlayerData>();
+        }
+
+        val leaderboardPlayersList: MutableList<LeaderboardPlayerData> = mutableListOf()
+
+        var summonerName: String
+        var leaguePoints: Int
+        var wins: Int
+        var losses: Int
+        var leaderboardPlayer: LeaderboardPlayerData
+
+        for (leaderboardResponse in leaderboardResponseList){
+
+            summonerName = leaderboardResponse.summonerName
+            leaguePoints = leaderboardResponse.leaguePoints
+            wins = leaderboardResponse.wins
+            losses = leaderboardResponse.losses
+
+            leaderboardPlayer = LeaderboardPlayerData(summonerName, leaguePoints, wins, losses)
+            leaderboardPlayersList.add(leaderboardPlayer)
+        }
+
+        return leaderboardPlayersList
     }
 
 }

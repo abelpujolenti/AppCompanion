@@ -68,9 +68,9 @@ class PlayerMatchHistoryAdapter(repository: LeagueOfLegendsRepository, private v
                         match.queueId == 430))
                     {
                         matchList.add(match)
-                        notifyDataSetChanged()
                     }
                 }
+                notifyDataSetChanged()
 
                 requestingData = false
             }
