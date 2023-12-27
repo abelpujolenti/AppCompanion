@@ -11,6 +11,7 @@ import cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder.TrackedPl
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.provider.TrackedPlayerProvider
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsRepository
+import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,7 +28,7 @@ class TrackedPlayerAdapter(repository: LeagueOfLegendsRepository) : Adapter<Trac
         viewHolder.itemView.setOnClickListener{
             MyApp.get().player = viewHolder.player!!
             val intent = Intent(parent.context, TrackedPlayerActivity::class.java)
-            intent.putExtra("Player", viewHolder.player)
+            intent.putExtra(SharedPreferencesManager.PLAYER_KEY, viewHolder.player)
             parent.context.startActivity(intent)
         }
         return viewHolder

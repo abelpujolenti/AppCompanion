@@ -49,7 +49,7 @@ class LeaderboardPlayerViewHolder(view: View, var leaderboardPlayerData: Leaderb
 
         val totalMatches = leaderboardPlayerData.wins + leaderboardPlayerData.losses
 
-        leaderboardPlayerWinRate.text = "${(leaderboardPlayerData.wins * 100) / totalMatches}"
+        leaderboardPlayerWinRate.text = "${(leaderboardPlayerData.wins * 100) / totalMatches} WR"
 
     }
 

@@ -20,7 +20,6 @@ class TrackedPlayerViewHolder(view: View, var player: PlayerData? = null) : View
 
     val playerProfileIcon by lazy { view.findViewById<ShapeableImageView>(R.id.tracker_player_cell_profile_icon) }
     val playerSummonerName by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_summoner_name) }
-    val playerMatchesList by lazy { view.findViewById<TextView>(R.id.matches) }
     val playerSoloTierIcon by lazy { view.findViewById<ShapeableImageView>(R.id.tracker_player_cell_tier_icon) }
     val playerSoloTierRank by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_tier_rank) }
     val playerSoloLeaguePoints by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_league_points) }
@@ -43,9 +42,14 @@ class TrackedPlayerViewHolder(view: View, var player: PlayerData? = null) : View
                         LoadIcon(playerSoloTierIcon, uri)
                     }
 
-                leagueData.rank?.let { rank ->
-                    playerSoloTierRank.text = "$tier $rank"/*getString(R.string.tier_rank, tier, rank)*/
+                playerSoloTierRank.text = tier
+
+                if (tier != "CHALLENGER" && tier != "GRANDMASTER" && tier != "MASTER"){
+                    leagueData.rank?.let { rank ->
+                        playerSoloTierRank.text = "${playerSoloTierRank.text} $rank"/*getString(R.string.tier_rank, tier, rank)*/
+                    }
                 }
+
             }
 
             playerSoloLeaguePoints.text = leagueData.leaguePoints.toString() + " LP"

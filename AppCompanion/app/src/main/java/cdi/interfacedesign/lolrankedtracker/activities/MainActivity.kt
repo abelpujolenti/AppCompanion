@@ -14,8 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.screen_main_activity) //Aquí veras que el botón de sign in no hace nada
-        //setContentView(R.layout.screen_main_menu) //Aquí veras que el drawer no funciona
+        setContentView(R.layout.screen_main_menu)
 
         MyApp.get().currentActivity = this
     }

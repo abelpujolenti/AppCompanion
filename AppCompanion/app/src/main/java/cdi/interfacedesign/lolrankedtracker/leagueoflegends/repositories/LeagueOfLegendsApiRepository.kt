@@ -10,6 +10,7 @@ import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.respons
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.MatchResponse
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.MatchResponseParticipant
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.ProfileResponse
+import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -25,26 +26,26 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
 
     companion object{
         const val API_KEY = "RGAPI-fca3bae3-c616-4228-bf6c-768f4ecfc22f"
-        const val BASE_URL_EUW1 = "https://euw1.api.riotgames.com/lol/"
-        const val BASE_URL_EUROPE = "https://europe.api.riotgames.com/lol/"
+        val BASE_URL_REGION = "https://${SharedPreferencesManager.regionSelected}.api.riotgames.com/lol/"
+        val BASE_URL_PLATFORM = "https://${SharedPreferencesManager.platformSelected}.api.riotgames.com/lol/"
 
         private val client: OkHttpClient = OkHttpClient.Builder().apply {
             interceptors().add(HeaderInterceptor(API_KEY))
         }.build()
 
-        val ApiPlatformService : RetrofitLeagueOfLegendsApiService by lazy {
+        val ApiRegionalService : RetrofitLeagueOfLegendsApiService by lazy {
             Retrofit.Builder()
                 .client(client)
-                .baseUrl(BASE_URL_EUW1)
+                .baseUrl(BASE_URL_REGION)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RetrofitLeagueOfLegendsApiService::class.java)
         }
 
-        val ApiRegionalService : RetrofitLeagueOfLegendsApiService by lazy {
+        val ApiPlatformService : RetrofitLeagueOfLegendsApiService by lazy {
             Retrofit.Builder()
                 .client(client)
-                .baseUrl(BASE_URL_EUROPE)
+                .baseUrl(BASE_URL_PLATFORM)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(RetrofitLeagueOfLegendsApiService::class.java)

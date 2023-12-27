@@ -73,8 +73,12 @@ class ProfileScreen : Fragment() {
                         LoadIcon(icon, uri)
                     }
 
-                leagueData.rank?.let { rank ->
-                    tierRank.text = "$tier $rank"/*getString(R.string.tier_rank, tier, rank)*/
+                tierRank.text = tier
+
+                if (tier != "CHALLENGER" && tier != "GRANDMASTER" && tier != "MASTER"){
+                    leagueData.rank?.let { rank ->
+                        tierRank.text = "${tierRank.text} $rank"/*getString(R.string.tier_rank, tier, rank)*/
+                    }
                 }
             }
 

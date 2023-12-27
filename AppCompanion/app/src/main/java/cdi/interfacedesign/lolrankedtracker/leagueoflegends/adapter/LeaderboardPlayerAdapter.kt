@@ -37,7 +37,7 @@ class LeaderboardPlayerAdapter(repository: LeagueOfLegendsRepository) : Adapter<
                 if (player != null) {
                     MyApp.get().player = player
                     val intent = Intent(parent.context, TrackedPlayerActivity::class.java)
-                    intent.putExtra("Player", player)
+                    intent.putExtra(SharedPreferencesManager.PLAYER_KEY, player)
                     parent.context.startActivity(intent)
                 }
             }
@@ -69,7 +69,9 @@ class LeaderboardPlayerAdapter(repository: LeagueOfLegendsRepository) : Adapter<
 
             CoroutineScope(Dispatchers.Main).launch {
 
-                for (leaderboardPlayer in leaderboardPlayersList)
+                val sortedLeaderboardPlayersList = leaderboardPlayersList.sortedWith(compareByDescending<LeaderboardPlayerData> { it.leaguePoints })
+
+                for (leaderboardPlayer in sortedLeaderboardPlayersList)
                 {
                     leaderboardPlayerList.add(leaderboardPlayer)
                 }
