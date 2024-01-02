@@ -73,7 +73,9 @@ class ProfileScreen : Fragment() {
                         LoadIcon(icon, uri)
                     }
 
-                tierRank.text = tier
+                val tierTitle = tier.substring(0, 1).uppercase() + tier.substring(1).lowercase()
+
+                tierRank.text = tierTitle
 
                 if (tier != "CHALLENGER" && tier != "GRANDMASTER" && tier != "MASTER"){
                     leagueData.rank?.let { rank ->
@@ -97,9 +99,12 @@ class ProfileScreen : Fragment() {
                     LoadIcon(icon, uri)
                 }
 
-            tierRank.text = "UNRANKED"
-        }
+            tierRank.text = "Unranked"
 
+            leaguePoints.visibility = View.GONE
+            winsLosses.visibility = View.GONE
+            winRate.visibility = View.GONE
+        }
     }
 
     private fun LoadIcon(image: ShapeableImageView, uri: Uri){

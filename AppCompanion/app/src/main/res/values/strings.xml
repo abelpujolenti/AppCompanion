@@ -50,7 +50,7 @@
     <string name="ranked_flex_mode">Ranked Flex</string>
     <string name="aram_mode">Aram</string>
     <string name="draft_mode">Draft</string>
-    <string name="blind_mode">Blind</string>
+    <string name="fast_mode">Fast Mode</string>
     <string name="minutes_seconds">%sm %ss</string>
 
     <!--Spinners-->
@@ -96,6 +96,12 @@
     <!--Regions-->
 
     <string name="regions_title">Regions</string>
+    <string name="user_not_found">User Name %s not found</string>
+    <string name="error_searching_player">Error Searching Player</string>
+    <string name="error_fetching_league_data">Error Fetching League Data</string>
+    <string name="error_fetching_matches_list">Error Fetching Matches List</string>
+    <string name="error_fetching_match_data">Error Fetching Match Data</string>
+    <string name="error_fetching_leaderboard_data">Error Fetching Leaderboard Data</string>
     <string-array name="Regions">
         <item>BR1</item>
         <item>EUN1</item>

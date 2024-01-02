@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/menu_navigation_bottombar"
+        app:labelVisibilityMode="unlabeled"
         app:itemIconSize="@dimen/bottom_bar_icons">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>

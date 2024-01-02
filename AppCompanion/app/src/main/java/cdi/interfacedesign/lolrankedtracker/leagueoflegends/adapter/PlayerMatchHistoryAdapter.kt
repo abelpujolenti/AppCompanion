@@ -33,9 +33,9 @@ class PlayerMatchHistoryAdapter(repository: LeagueOfLegendsRepository, private v
     override fun onBindViewHolder(holder: PlayerMatchHistoryViewHolder, position: Int) {
         holder.SetupWithPlayerMatch(matchList[position])
 
-        if (position >= matchList.size - paginationSize){
+        /*if (position >= matchList.size - paginationSize){
             LoadMatchData(puuid)
-        }
+        }*/
     }
 
     fun LoadMatchData(puuid: String){
@@ -65,7 +65,7 @@ class PlayerMatchHistoryAdapter(repository: LeagueOfLegendsRepository, private v
                         match.queueId == 440 ||
                         match.queueId == 450 ||
                         match.queueId == 400 ||
-                        match.queueId == 430))
+                        match.queueId == 490))
                     {
                         matchList.add(match)
                     }

@@ -21,7 +21,6 @@ class AppMainMenu : Fragment(), DrawerListener {
 
         private lateinit var instance : AppMainMenu
         fun get() = instance
-
     }
 
     lateinit var fragmentView: View
@@ -45,7 +44,7 @@ class AppMainMenu : Fragment(), DrawerListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var screen: Fragment = LeaderBoardScreen()
+        var screen: Fragment = TrackerScreen()
         ReplaceScreen(screen, true)
 
         navigationDrawer.setNavigationItemSelectedListener { menuItem ->

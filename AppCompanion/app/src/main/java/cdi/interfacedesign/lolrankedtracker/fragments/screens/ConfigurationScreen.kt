@@ -11,6 +11,7 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppMainMenu
 import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 import java.util.Locale
 
@@ -38,7 +39,9 @@ class ConfigurationScreen : Fragment() {
 
         spinnerPlatform.adapter = adapter
 
-        val spinnerPosition: Int = adapter.getPosition(SharedPreferencesManager.platformSelected.uppercase(Locale.ROOT))
+        adapter.getPosition(SharedPreferencesManager.tierSelected)
+
+        val spinnerPosition: Int = adapter.getPosition(SharedPreferencesManager.platformSelected.uppercase())
 
         spinnerPlatform.setSelection(spinnerPosition)
 
@@ -47,71 +50,19 @@ class ConfigurationScreen : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when(spinnerPlatform.selectedItem.toString())
                 {
-                    regions[0] -> {
+                    regions[0], regions[5], regions[6], regions[7] ->
                         SharedPreferencesManager.regionSelected = "americas"
-                        SharedPreferencesManager.platformSelected ="br1"
-                    }
-                    regions[1] -> {
+
+                    regions[1], regions[2], regions[10], regions[13] ->
                         SharedPreferencesManager.regionSelected = "europe"
-                        SharedPreferencesManager.platformSelected ="eun1"
-                    }
-                    regions[2] -> {
-                        SharedPreferencesManager.regionSelected = "europe"
-                        SharedPreferencesManager.platformSelected ="euw1"
-                    }
-                    regions[3] -> {
+
+                    regions[3], regions[4] ->
                         SharedPreferencesManager.regionSelected = "asia"
-                        SharedPreferencesManager.platformSelected ="jp1"
-                    }
-                    regions[4] -> {
-                        SharedPreferencesManager.regionSelected = "asia"
-                        SharedPreferencesManager.platformSelected ="kr"
-                    }
-                    regions[5] -> {
-                        SharedPreferencesManager.regionSelected = "americas"
-                        SharedPreferencesManager.platformSelected ="la1"
-                    }
-                    regions[6] -> {
-                        SharedPreferencesManager.regionSelected = "americas"
-                        SharedPreferencesManager.platformSelected ="la2"
-                    }
-                    regions[7] -> {
-                        SharedPreferencesManager.regionSelected = "americas"
-                        SharedPreferencesManager.platformSelected ="na1"
-                    }
-                    regions[8] -> {
+
+                    regions[8], regions[9], regions[11], regions[12], regions[14], regions[15] ->
                         SharedPreferencesManager.regionSelected = "sea"
-                        SharedPreferencesManager.platformSelected ="oc1"
-                    }
-                    regions[9] -> {
-                        SharedPreferencesManager.regionSelected = "sea"
-                        SharedPreferencesManager.platformSelected ="ph2"
-                    }
-                    regions[10] -> {
-                        SharedPreferencesManager.regionSelected = "europe"
-                        SharedPreferencesManager.platformSelected ="ru"
-                    }
-                    regions[11] -> {
-                        SharedPreferencesManager.regionSelected = "sea"
-                        SharedPreferencesManager.platformSelected ="sg2"
-                    }
-                    regions[12] -> {
-                        SharedPreferencesManager.regionSelected = "sea"
-                        SharedPreferencesManager.platformSelected ="th2"
-                    }
-                    regions[13] -> {
-                        SharedPreferencesManager.regionSelected = "europe"
-                        SharedPreferencesManager.platformSelected ="tr1"
-                    }
-                    regions[14] -> {
-                        SharedPreferencesManager.regionSelected = "sea"
-                        SharedPreferencesManager.platformSelected ="tw2"
-                    }
-                    regions[15] -> {
-                        SharedPreferencesManager.regionSelected = "sea"
-                        SharedPreferencesManager.platformSelected ="vn2"
-                    }
                 }
+                SharedPreferencesManager.platformSelected = spinnerPlatform.selectedItem.toString().lowercase()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -120,7 +71,8 @@ class ConfigurationScreen : Fragment() {
         }
 
         logoutButton.setOnClickListener {
-            MyApp.get().currentActivity.finish()
+            //MyApp.get().currentActivity.finish()
+            AppMainMenu.get().ReplaceScreen(TrackerScreen(), false)
         }
 
     }

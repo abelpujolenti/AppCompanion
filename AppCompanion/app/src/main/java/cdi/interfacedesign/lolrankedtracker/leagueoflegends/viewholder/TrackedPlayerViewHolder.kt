@@ -42,37 +42,27 @@ class TrackedPlayerViewHolder(view: View, var player: PlayerData? = null) : View
                         LoadIcon(playerSoloTierIcon, uri)
                     }
 
-                playerSoloTierRank.text = tier
+                val tierTitle = tier.substring(0, 1).uppercase() + tier.substring(1).lowercase()
+
+                playerSoloTierRank.text = tierTitle
 
                 if (tier != "CHALLENGER" && tier != "GRANDMASTER" && tier != "MASTER"){
                     leagueData.rank?.let { rank ->
                         playerSoloTierRank.text = "${playerSoloTierRank.text} $rank"/*getString(R.string.tier_rank, tier, rank)*/
                     }
                 }
-
             }
 
             playerSoloLeaguePoints.text = leagueData.leaguePoints.toString() + " LP"
         } ?: run{
-
-            /*val width = LinearLayout.LayoutParams.WRAP_CONTENT
-            val height = LinearLayout.LayoutParams.WRAP_CONTENT
-            var layoutParams = LinearLayout.LayoutParams(width, height, 0.9f)
-            playerSoloTierIcon.layoutParams = layoutParams
-
-            layoutParams = LinearLayout.LayoutParams(width, height, 0.1f)
-            playerSoloTierRank.layoutParams = layoutParams
-
-            layoutParams = LinearLayout.LayoutParams(width, height, 0f)
-            playerSoloLeaguePoints.layoutParams = layoutParams*/
 
             MyFirebase.storage.LoadImage("/tier/UNRANKED.png").downloadUrl
                 .addOnSuccessListener { uri ->
                     LoadIcon(playerSoloTierIcon, uri)
                 }
 
-            playerSoloTierRank.text = "UNRANKED"
-            playerSoloLeaguePoints.text = ""
+            playerSoloTierRank.text = "Unranked"
+            playerSoloLeaguePoints.visibility = View.GONE
         }
 
         discardButton.setOnClickListener {

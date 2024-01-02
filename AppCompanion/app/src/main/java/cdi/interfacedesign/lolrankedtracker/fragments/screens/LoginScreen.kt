@@ -36,7 +36,7 @@ class LoginScreen: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentView = inflater.inflate(R.layout.screen_main_activity, container, false)
         return fragmentView
     }

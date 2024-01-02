@@ -2,6 +2,7 @@ package cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder
 
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -37,12 +38,14 @@ class PlayerMatchHistoryViewHolder(view: View, var match: MatchData? = null) : V
 
     fun SetupWithPlayerMatch(match: MatchData){
 
+        Log.e("MatchId", match.queueId.toString())
+
         when(match.queueId){
             420 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.ranked_solo_mode)
             440 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.ranked_flex_mode)
             450 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.aram_mode)
             400 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.draft_mode)
-            430 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.blind_mode)
+            490 -> queueType.text = ContextCompat.getString(MyApp.get().currentActivity, R.string.fast_mode)
         }
 
         when(match.win){

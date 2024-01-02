@@ -16,14 +16,15 @@ object SharedPreferencesManager {
 
     private val editor: SharedPreferences.Editor by lazy { shared.edit() }
     const val PLAYER_KEY = "Player"
+    const val MATCHES_LIST_KEY = "Matches List"
     const val MATCH_KEY = "Match"
     const val LEAGUE_KEY = "League"
 
-    public var platformSelected: String = "euw1"
-    public var regionSelected: String = "europe"
-    public var queueTypeSelected: String = "RANKED_SOLO_5x5"
-    public var tierSelected: String = "Emerald"
-    public var rankSelected: String = "I"
+    var platformSelected: String = "euw1"
+    var regionSelected: String = "europe"
+    var queueTypeSelected: String = "RANKED_SOLO_5x5"
+    var tierSelected: String = "Challenger"
+    var rankSelected: String = "I"
 
     public var Players: MutableList<PlayerData>
         get(){

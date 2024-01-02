@@ -1,5 +1,9 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories
 
+import cdi.interfacedesign.lolrankedtracker.MyApp
+import cdi.interfacedesign.lolrankedtracker.R
+import cdi.interfacedesign.lolrankedtracker.firebase.MyFirebase
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppMainMenu
 import cdi.interfacedesign.lolrankedtracker.interceptors.HeaderInterceptor
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.LeaderboardPlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.LeagueData
@@ -11,6 +15,7 @@ import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.respons
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.MatchResponseParticipant
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.responses.ProfileResponse
 import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
+import com.google.android.material.snackbar.Snackbar
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -89,6 +94,18 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         val responseProfile = ApiPlatformService.GetProfile(summonerName)
 
         if (!responseProfile.isSuccessful){
+            if (responseProfile.code() != 404){
+                MyFirebase.crashlytics.logSimpleError("Api Response Error"){
+                    key("Parameter Summoner Name", summonerName)
+                    key("Code", responseProfile.code())
+                    key("Response", SharedPreferencesManager.PLAYER_KEY)
+                }
+                Snackbar.make(AppMainMenu.get().fragmentView, MyApp.get().currentActivity.getString(R.string.error_searching_player), Snackbar.LENGTH_SHORT)
+                    .show()
+                return null
+            }
+            Snackbar.make(AppMainMenu.get().fragmentView, MyApp.get().currentActivity.getString(R.string.user_not_found, summonerName), Snackbar.LENGTH_SHORT)
+                .show()
             return null
         }
 
@@ -156,7 +173,13 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         val responseLeague = ApiPlatformService.GetLeague(encryptedSummonerId = summonerId)
 
         if (!responseLeague.isSuccessful){
-
+            MyFirebase.crashlytics.logSimpleError("Api Error"){
+                key("Parameter Summoner Id", summonerId)
+                key("Code", responseLeague.code())
+                key("Response", SharedPreferencesManager.LEAGUE_KEY)
+            }
+            Snackbar.make(AppMainMenu.get().fragmentView, MyApp.get().currentActivity.getString(R.string.error_fetching_league_data), Snackbar.LENGTH_SHORT)
+                .show()
             return emptyList<LeagueResponse>();
         }
 
@@ -172,6 +195,15 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         val responseMatchesList = ApiRegionalService.GetMatchList(puuid, start, count)
 
         if (!responseMatchesList.isSuccessful){
+            MyFirebase.crashlytics.logSimpleError("Api Error"){
+                key("Parameter Count", count)
+                key("Parameter Start", start)
+                key("Parameter Puuid", puuid)
+                key("Code", responseMatchesList.code())
+                key("Response", SharedPreferencesManager.MATCHES_LIST_KEY)
+            }
+            Snackbar.make(AppMainMenu.get().fragmentView, MyApp.get().currentActivity.getString(R.string.error_fetching_matches_list), Snackbar.LENGTH_SHORT)
+                .show()
             return emptyList<String>();
         }
 
@@ -187,6 +219,14 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         val responseMatch = ApiRegionalService.GetMatch(matchId)
 
         if (!responseMatch.isSuccessful){
+            MyFirebase.crashlytics.logSimpleError("Api Error"){
+                key("Parameter Match Id", matchId)
+                key("Parameter Puuid", puuid)
+                key("Code", responseMatch.code())
+                key("Response", SharedPreferencesManager.MATCH_KEY)
+            }
+            Snackbar.make(AppMainMenu.get().fragmentView, MyApp.get().currentActivity.getString(R.string.error_fetching_match_data), Snackbar.LENGTH_SHORT)
+                .show()
             return null;
         }
 
@@ -247,6 +287,18 @@ class LeagueOfLegendsApiRepository : LeagueOfLegendsRepository {
         val responseLeaderboard = ApiPlatformService.GetLeaderboard(queue, tier, rank, page)
 
         if (!responseLeaderboard.isSuccessful){
+            if (responseLeaderboard.code() != 404){
+                MyFirebase.crashlytics.logSimpleError("Api Error"){
+                    key("Parameter Patg", page)
+                    key("Parameter Rank", rank)
+                    key("Parameter Tier", tier)
+                    key("Parameter Queue", queue)
+                    key("Code", responseLeaderboard.code())
+                    key("Response", SharedPreferencesManager.MATCH_KEY)
+                }
+            }
+            Snackbar.make(AppMainMenu.get().fragmentView, MyApp.get().currentActivity.getString(R.string.error_fetching_league_data), Snackbar.LENGTH_SHORT)
+                .show()
             return emptyList<LeaderboardPlayerData>();
         }
 
