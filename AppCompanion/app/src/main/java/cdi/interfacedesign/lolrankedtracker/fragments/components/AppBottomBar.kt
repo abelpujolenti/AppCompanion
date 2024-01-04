@@ -31,6 +31,7 @@ class AppBottomBar: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.component_bottom_bar, container, false);
         bottomBar = view.findViewById(R.id.player_navigation_bottom_bar);
+        bottomBar.maxItemCount
         return view;
     }
 
@@ -42,7 +43,6 @@ class AppBottomBar: Fragment() {
 
             if (menuItem.itemId != bottomBar.selectedItemId)
             {
-
                 when(menuItem.itemId){
                     R.id.player_profile_button -> {
                         when(bottomBar.selectedItemId){

@@ -33,7 +33,7 @@
 
     <!--Leaderboard-->
     <string name="ranked_leaderboard_title">Ranked Leaderboard</string>
-    <string name="ranked_solo">Ranked Solo</string>
+    <string name="ranked_solo_mode">Ranked Solo</string>
 
     <!--Bottom Bar-->
     <string name="player_profile_button">Profile</string>
@@ -45,5 +45,80 @@
     <string name="login_error">Error on try to log in</string>
     <string name="tier_rank">%s %s</string>
     <string name="configuration_title">Configuration</string>
+    <string name="victory">Victory</string>
+    <string name="defeat">Defeat</string>
+    <string name="ranked_flex_mode">Ranked Flex</string>
+    <string name="aram_mode">Aram</string>
+    <string name="draft_mode">Draft</string>
+    <string name="fast_mode">Fast Mode</string>
+    <string name="minutes_seconds">%sm %ss</string>
+
+    <!--Spinners-->
+
+    <string name="queue_types">Queue Types</string>
+    <string-array name="QueueType">
+        <item>Ranked Solo/Duo</item>
+        <item>Ranked Flex</item>
+    </string-array>
+
+    <string name="tiers">Tiers</string>
+    <string-array name="Tiers">
+        <item>Challenger</item>
+        <item>Grand Master</item>
+        <item>Master</item>
+        <item>Diamond</item>
+        <item>Emerald</item>
+        <item>Platinum</item>
+        <item>Gold</item>
+        <item>Silver</item>
+        <item>Bronze</item>
+        <item>Iron</item>
+    </string-array>
+
+    <string name="ranks">Ranks</string>
+    <string-array name="Ranks">
+        <item>I</item>
+        <item>II</item>
+        <item>III</item>
+        <item>IV</item>
+    </string-array>
+
+    <!--Platforms-->
+
+    <string name="platforms_title">Platforms</string>
+    <string-array name="Platforms">
+        <item>AMERICAS</item>
+        <item>ASIA</item>
+        <item>EUROPE</item>
+        <item>SEA</item>
+    </string-array>
+
+    <!--Regions-->
+
+    <string name="regions_title">Regions</string>
+    <string name="user_not_found">User Name %s not found</string>
+    <string name="error_searching_player">Error Searching Player</string>
+    <string name="error_fetching_league_data">Error Fetching League Data</string>
+    <string name="error_fetching_matches_list">Error Fetching Matches List</string>
+    <string name="error_fetching_match_data">Error Fetching Match Data</string>
+    <string name="error_fetching_leaderboard_data">Error Fetching Leaderboard Data</string>
+    <string-array name="Regions">
+        <item>BR1</item>
+        <item>EUN1</item>
+        <item>EUW1</item>
+        <item>JP1</item>
+        <item>KR</item>
+        <item>LA1</item>
+        <item>LA2</item>
+        <item>NA1</item>
+        <item>OC1</item>
+        <item>PH2</item>
+        <item>RU</item>
+        <item>SG2</item>
+        <item>TH2</item>
+        <item>TR1</item>
+        <item>TW2</item>
+        <item>VN2</item>
+    </string-array>
 
 </resources>

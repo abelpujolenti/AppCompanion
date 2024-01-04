@@ -2,6 +2,7 @@ package cdi.interfacedesign.lolrankedtracker.fragments.screens
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,7 @@ class LoginScreen: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fragmentView = inflater.inflate(R.layout.screen_main_activity, container, false)
         return fragmentView
     }
@@ -46,6 +47,7 @@ class LoginScreen: Fragment() {
     }
 
     private fun GoogleAuthentication() {
+        Log.e("Holi", "holi")
         val providers = arrayListOf(
             AuthUI.IdpConfig.GoogleBuilder().build()
         )

@@ -17,13 +17,5 @@ class TrackedPlayerActivity : AppCompatActivity() {
         setContentView(R.layout.screen_tracked_player)
 
         MyApp.get().currentActivity = this
-
-        val player: PlayerData?
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-            player = intent.getSerializableExtra("Player", PlayerData::class.java)
-        } else {
-            player = intent.getSerializableExtra("Player") as? PlayerData
-        }
     }
 }

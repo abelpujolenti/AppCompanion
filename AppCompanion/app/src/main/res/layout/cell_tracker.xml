@@ -69,6 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:textSize="@dimen/small"
                     android:layout_weight="0.1"
                     tool:text="Challenger">
@@ -79,8 +80,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_weight="0.1"
                     android:textSize="@dimen/small"
+                    android:textColor="@color/yellow_medium"
                     tool:text="1127 LP">
                 </TextView>
 
@@ -96,6 +99,7 @@
                     android:id="@+id/discard_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:background="@color/fui_transparent"
                     android:src="@drawable/discard_button">
                 </ImageButton>

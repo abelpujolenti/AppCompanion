@@ -1,9 +1,7 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -16,20 +14,18 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.net.URI
 import java.net.URL
 
-class PlayerViewHolder(view: View, var player: PlayerData? = null) : ViewHolder(view) {
+class TrackedPlayerViewHolder(view: View, var player: PlayerData? = null) : ViewHolder(view) {
 
     val playerProfileIcon by lazy { view.findViewById<ShapeableImageView>(R.id.tracker_player_cell_profile_icon) }
     val playerSummonerName by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_summoner_name) }
-    val playerMatchesList by lazy { view.findViewById<TextView>(R.id.matches) }
     val playerSoloTierIcon by lazy { view.findViewById<ShapeableImageView>(R.id.tracker_player_cell_tier_icon) }
     val playerSoloTierRank by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_tier_rank) }
     val playerSoloLeaguePoints by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_league_points) }
     val discardButton by lazy { view.findViewById<ImageButton>(R.id.discard_button) }
 
-    fun SetupWithPlayer(player: PlayerData){
+    fun SetupWithTrackedPlayer(player: PlayerData){
 
         MyFirebase.storage.LoadImage("/profileIcon/${player.profileIconId}.png").downloadUrl
             .addOnSuccessListener { uri ->
@@ -46,32 +42,27 @@ class PlayerViewHolder(view: View, var player: PlayerData? = null) : ViewHolder(
                         LoadIcon(playerSoloTierIcon, uri)
                     }
 
-                leagueData.rank?.let { rank ->
-                    playerSoloTierRank.text = "$tier $rank"/*getString(R.string.tier_rank, tier, rank)*/
+                val tierTitle = tier.substring(0, 1).uppercase() + tier.substring(1).lowercase()
+
+                playerSoloTierRank.text = tierTitle
+
+                if (tier != "CHALLENGER" && tier != "GRANDMASTER" && tier != "MASTER"){
+                    leagueData.rank?.let { rank ->
+                        playerSoloTierRank.text = "${playerSoloTierRank.text} $rank"/*getString(R.string.tier_rank, tier, rank)*/
+                    }
                 }
             }
 
             playerSoloLeaguePoints.text = leagueData.leaguePoints.toString() + " LP"
         } ?: run{
 
-            /*val width = LinearLayout.LayoutParams.WRAP_CONTENT
-            val height = LinearLayout.LayoutParams.WRAP_CONTENT
-            var layoutParams = LinearLayout.LayoutParams(width, height, 0.9f)
-            playerSoloTierIcon.layoutParams = layoutParams
-
-            layoutParams = LinearLayout.LayoutParams(width, height, 0.1f)
-            playerSoloTierRank.layoutParams = layoutParams
-
-            layoutParams = LinearLayout.LayoutParams(width, height, 0f)
-            playerSoloLeaguePoints.layoutParams = layoutParams*/
-
             MyFirebase.storage.LoadImage("/tier/UNRANKED.png").downloadUrl
                 .addOnSuccessListener { uri ->
                     LoadIcon(playerSoloTierIcon, uri)
                 }
 
-            playerSoloTierRank.text = "UNRANKED"
-            playerSoloLeaguePoints.text = ""
+            playerSoloTierRank.text = "Unranked"
+            playerSoloLeaguePoints.visibility = View.GONE
         }
 
         discardButton.setOnClickListener {
@@ -95,6 +86,4 @@ class PlayerViewHolder(view: View, var player: PlayerData? = null) : ViewHolder(
             }
         }
     }
-
-
 }

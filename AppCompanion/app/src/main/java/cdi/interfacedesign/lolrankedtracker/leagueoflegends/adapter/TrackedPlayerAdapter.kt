@@ -1,34 +1,34 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter
 
-import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
-import cdi.interfacedesign.lolrankedtracker.activities.MainMenuActivity
 import cdi.interfacedesign.lolrankedtracker.activities.TrackedPlayerActivity
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder.PlayerViewHolder
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder.TrackedPlayerViewHolder
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
-import cdi.interfacedesign.lolrankedtracker.leagueoflegends.provider.PlayerProvider
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.provider.TrackedPlayerProvider
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsRepository
+import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PlayerAdapter(private val repository: LeagueOfLegendsRepository) : Adapter<PlayerViewHolder>() {
+class TrackedPlayerAdapter(repository: LeagueOfLegendsRepository) : Adapter<TrackedPlayerViewHolder>() {
 
-    private val provider: PlayerProvider = PlayerProvider(repository)
+    private val provider: TrackedPlayerProvider = TrackedPlayerProvider(repository)
     private var playerList: MutableList<PlayerData> = mutableListOf()
     private var requestingData = false;
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackedPlayerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val viewHolder = PlayerViewHolder(layoutInflater.inflate(R.layout.cell_tracker, parent, false))
+        val viewHolder = TrackedPlayerViewHolder(layoutInflater.inflate(R.layout.cell_tracker, parent, false))
         viewHolder.itemView.setOnClickListener{
+            MyApp.get().player = viewHolder.player!!
             val intent = Intent(parent.context, TrackedPlayerActivity::class.java)
-            intent.putExtra("Player", viewHolder.player)
+            intent.putExtra(SharedPreferencesManager.PLAYER_KEY, viewHolder.player)
             parent.context.startActivity(intent)
         }
         return viewHolder
@@ -36,8 +36,8 @@ class PlayerAdapter(private val repository: LeagueOfLegendsRepository) : Adapter
 
     override fun getItemCount(): Int = playerList.count()
 
-    override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
-        holder.SetupWithPlayer(playerList[position])
+    override fun onBindViewHolder(holder: TrackedPlayerViewHolder, position: Int) {
+        holder.SetupWithTrackedPlayer(playerList[position])
     }
 
     fun LoadPlayerData(summonerName: String){
@@ -51,7 +51,7 @@ class PlayerAdapter(private val repository: LeagueOfLegendsRepository) : Adapter
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            val player: PlayerData? = provider.GetPaginatedPlayer(summonerName)
+            val player: PlayerData? = provider.GetPlayer(summonerName)
 
             CoroutineScope(Dispatchers.Main).launch {
 
