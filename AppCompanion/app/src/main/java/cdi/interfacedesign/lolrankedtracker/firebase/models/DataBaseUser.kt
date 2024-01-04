@@ -10,8 +10,6 @@ data class DataBaseUser(
     val admin: Boolean = false
 
 ) : DataBaseData{
-    override fun GetTable(): String {
-        TODO("Not yet implemented")
-    }
+    override fun GetTable(): String = "users"
 
 }

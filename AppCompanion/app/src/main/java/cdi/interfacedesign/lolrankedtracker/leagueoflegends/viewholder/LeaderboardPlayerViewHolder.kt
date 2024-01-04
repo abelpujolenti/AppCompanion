@@ -51,6 +51,7 @@ class LeaderboardPlayerViewHolder(view: View, var leaderboardPlayerData: Leaderb
 
         leaderboardPlayerWinRate.text = "${(leaderboardPlayerData.wins * 100) / totalMatches} WR"
 
+        this.leaderboardPlayerData = leaderboardPlayerData
     }
 
     private fun LoadIcon(image: ShapeableImageView, uri: Uri){

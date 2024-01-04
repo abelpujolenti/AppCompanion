@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
 import cdi.interfacedesign.lolrankedtracker.firebase.MyFirebase
+import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.CoroutineScope
@@ -38,7 +39,7 @@ class AppTrackedPlayer : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val player = MyApp.get().player
+        val player = SharedPreferencesManager.player
 
         MyFirebase.storage.LoadImage("/profileIcon/${player.profileIconId}.png").downloadUrl
             .addOnSuccessListener { uri ->

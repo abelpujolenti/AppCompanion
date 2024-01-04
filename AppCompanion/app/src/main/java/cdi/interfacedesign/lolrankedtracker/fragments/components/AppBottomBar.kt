@@ -31,7 +31,6 @@ class AppBottomBar: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.component_bottom_bar, container, false);
         bottomBar = view.findViewById(R.id.player_navigation_bottom_bar);
-        bottomBar.maxItemCount
         return view;
     }
 

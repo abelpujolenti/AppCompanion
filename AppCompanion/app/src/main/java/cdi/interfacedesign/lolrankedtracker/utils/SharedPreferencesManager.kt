@@ -3,6 +3,8 @@ package cdi.interfacedesign.lolrankedtracker.utils
 import android.content.Context
 import android.content.SharedPreferences
 import cdi.interfacedesign.lolrankedtracker.MyApp
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.LeaderboardPlayerAdapter
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.TrackedPlayerAdapter
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -19,12 +21,19 @@ object SharedPreferencesManager {
     const val MATCHES_LIST_KEY = "Matches List"
     const val MATCH_KEY = "Match"
     const val LEAGUE_KEY = "League"
+    const val TRACKER_KEY = "Tracker"
+    const val LEADERBOARD_KEY = "Leaderboard"
 
     var platformSelected: String = "euw1"
     var regionSelected: String = "europe"
     var queueTypeSelected: String = "RANKED_SOLO_5x5"
     var tierSelected: String = "Challenger"
     var rankSelected: String = "I"
+
+    lateinit var player: PlayerData
+    lateinit var trackedPlayerAdapter: TrackedPlayerAdapter
+    lateinit var leaderboardPlayerAdapter: LeaderboardPlayerAdapter
+    lateinit var previousScreen: String
 
     public var Players: MutableList<PlayerData>
         get(){

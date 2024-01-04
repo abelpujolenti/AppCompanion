@@ -10,20 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/component_toolbar_container"
-            android:name="cdi.interfacedesign.lolrankedtracker.fragments.components.AppToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            tools:layout="@layout/component_toolbar">
-        </androidx.fragment.app.FragmentContainerView>
-
         <LinearLayout
             android:id="@+id/tracked_player_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/component_toolbar_container"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
