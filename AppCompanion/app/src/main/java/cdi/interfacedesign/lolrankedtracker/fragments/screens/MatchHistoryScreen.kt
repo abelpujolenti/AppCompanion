@@ -11,6 +11,7 @@ import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.PlayerMatchHistoryAdapter
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsApiRepository
+import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 
 class MatchHistoryScreen : Fragment() {
 
@@ -34,7 +35,7 @@ class MatchHistoryScreen : Fragment() {
         //val repository = LeagueOfLegendsMockRepository();
         val repository = LeagueOfLegendsApiRepository();
 
-        val playerMatchHistoryAdapter = PlayerMatchHistoryAdapter(repository, MyApp.get().player.puuid)
+        val playerMatchHistoryAdapter = PlayerMatchHistoryAdapter(repository, SharedPreferencesManager.player.puuid)
 
         table.adapter = playerMatchHistoryAdapter
     }

@@ -2,7 +2,6 @@ package cdi.interfacedesign.lolrankedtracker.fragments.screens
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import cdi.interfacedesign.lolrankedtracker.R
 import cdi.interfacedesign.lolrankedtracker.firebase.MyFirebase
 import cdi.interfacedesign.lolrankedtracker.firebase.models.DataBaseUser
 import cdi.interfacedesign.lolrankedtracker.fragments.components.AppMainMenu
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppToolbar
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -37,7 +37,7 @@ class LoginScreen: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        fragmentView = inflater.inflate(R.layout.screen_main_activity, container, false)
+        fragmentView = inflater.inflate(R.layout.screen_login, container, false)
         return fragmentView
     }
 
@@ -47,7 +47,6 @@ class LoginScreen: Fragment() {
     }
 
     private fun GoogleAuthentication() {
-        Log.e("Holi", "holi")
         val providers = arrayListOf(
             AuthUI.IdpConfig.GoogleBuilder().build()
         )
@@ -105,6 +104,8 @@ class LoginScreen: Fragment() {
             onSuccess = { dbUser ->
                 MyFirebase.authentication.SetCurrentUser(dbUser)
                 sendToastSuccessAndClose()
+                AppMainMenu.get().ReplaceScreen(TrackerScreen(), false)
+                AppToolbar.get().toolbar.title = resources.getString(R.string.tracker_title)
             },
             onFailure = {
                 sendToastError()

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppToolbar
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.LeaderboardPlayerAdapter
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsApiRepository
 import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
@@ -48,6 +49,8 @@ class LeaderBoardScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        AppToolbar.get().ShowNavigationItem()
 
         val queueTypes = resources.getStringArray(R.array.QueueType)
         val tiers = resources.getStringArray(R.array.Tiers)
@@ -149,14 +152,10 @@ class LeaderBoardScreen : Fragment() {
         }
 
         table.layoutManager = LinearLayoutManager(MyApp.get().currentActivity)
-
-        val repository = LeagueOfLegendsApiRepository()
-
-        val leaderboardPlayerAdapter = LeaderboardPlayerAdapter(repository)
-        table.adapter = leaderboardPlayerAdapter
+        table.adapter = SharedPreferencesManager.leaderboardPlayerAdapter
 
         searchButton.setOnClickListener {
-            leaderboardPlayerAdapter.LoadLeaderboardPlayersData(queueTypeSelected, tierSelected, rankSelected, 1)
+            SharedPreferencesManager.leaderboardPlayerAdapter.LoadLeaderboardPlayersData(queueTypeSelected, tierSelected, rankSelected, 1)
         }
     }
 }

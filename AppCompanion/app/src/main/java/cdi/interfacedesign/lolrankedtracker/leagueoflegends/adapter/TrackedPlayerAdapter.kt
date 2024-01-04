@@ -1,12 +1,13 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
-import cdi.interfacedesign.lolrankedtracker.activities.TrackedPlayerActivity
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppMainMenu
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppToolbar
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppTrackedPlayer
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder.TrackedPlayerViewHolder
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.provider.TrackedPlayerProvider
@@ -26,10 +27,14 @@ class TrackedPlayerAdapter(repository: LeagueOfLegendsRepository) : Adapter<Trac
         val layoutInflater = LayoutInflater.from(parent.context)
         val viewHolder = TrackedPlayerViewHolder(layoutInflater.inflate(R.layout.cell_tracker, parent, false))
         viewHolder.itemView.setOnClickListener{
-            MyApp.get().player = viewHolder.player!!
-            val intent = Intent(parent.context, TrackedPlayerActivity::class.java)
-            intent.putExtra(SharedPreferencesManager.PLAYER_KEY, viewHolder.player)
-            parent.context.startActivity(intent)
+            val appToolbar = AppToolbar.get()
+            val sharedPreferences = SharedPreferencesManager
+            sharedPreferences.player = viewHolder.player!!
+            sharedPreferences.previousScreen = sharedPreferences.TRACKER_KEY
+            AppMainMenu.get().ReplaceScreen(AppTrackedPlayer(), false)
+            appToolbar.toolbar.title = MyApp.get().currentActivity.resources.getString(R.string.profile_title)
+            appToolbar.ShowBackItem()
+            appToolbar.HideNavigationItem()
         }
         return viewHolder
     }
@@ -37,7 +42,10 @@ class TrackedPlayerAdapter(repository: LeagueOfLegendsRepository) : Adapter<Trac
     override fun getItemCount(): Int = playerList.count()
 
     override fun onBindViewHolder(holder: TrackedPlayerViewHolder, position: Int) {
-        holder.SetupWithTrackedPlayer(playerList[position])
+        holder.SetupWithTrackedPlayer(playerList[position]){
+            playerList.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
     fun LoadPlayerData(summonerName: String){

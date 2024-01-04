@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
 import cdi.interfacedesign.lolrankedtracker.fragments.components.AppMainMenu
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppToolbar
 import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 import java.util.Locale
 
@@ -71,8 +72,9 @@ class ConfigurationScreen : Fragment() {
         }
 
         logoutButton.setOnClickListener {
-            //MyApp.get().currentActivity.finish()
-            AppMainMenu.get().ReplaceScreen(TrackerScreen(), false)
+            AppMainMenu.get().ReplaceScreen(LoginScreen(), false)
+            AppToolbar.get().toolbar.title = resources.getString(R.string.login_title)
+            AppToolbar.get().HideNavigationItem()
         }
 
     }

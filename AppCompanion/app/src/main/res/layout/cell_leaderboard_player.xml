@@ -78,6 +78,7 @@
                         android:id="@+id/leaderboard_player_wins_losses"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:textSize="@dimen/small"
                         tool:text="57W 30L">
 

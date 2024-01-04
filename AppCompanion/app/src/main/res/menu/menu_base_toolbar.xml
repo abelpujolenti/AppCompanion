@@ -6,7 +6,7 @@
             android:id="@+id/toolbar_exit_button"
             android:title="@string/exit"
             android:icon="@drawable/exit_button"
-            app:showAsAction="always">
+            app:showAsAction="ifRoom">
 
         </item>
     </group>

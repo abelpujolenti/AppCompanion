@@ -8,11 +8,17 @@ import android.view.ViewGroup
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.fragment.app.Fragment
+import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
 import cdi.interfacedesign.lolrankedtracker.fragments.screens.ConfigurationScreen
 import cdi.interfacedesign.lolrankedtracker.fragments.screens.LeaderBoardScreen
 import cdi.interfacedesign.lolrankedtracker.fragments.screens.LoginScreen
+import cdi.interfacedesign.lolrankedtracker.fragments.screens.ProfileScreen
 import cdi.interfacedesign.lolrankedtracker.fragments.screens.TrackerScreen
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.LeaderboardPlayerAdapter
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.TrackedPlayerAdapter
+import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsApiRepository
+import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 import com.google.android.material.navigation.NavigationView
 
 class AppMainMenu : Fragment(), DrawerListener {
@@ -44,7 +50,11 @@ class AppMainMenu : Fragment(), DrawerListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var screen: Fragment = TrackerScreen()
+        val repository = LeagueOfLegendsApiRepository();
+        SharedPreferencesManager.trackedPlayerAdapter = TrackedPlayerAdapter(repository)
+        SharedPreferencesManager.leaderboardPlayerAdapter = LeaderboardPlayerAdapter(repository)
+
+        var screen: Fragment = LoginScreen()
         ReplaceScreen(screen, true)
 
         navigationDrawer.setNavigationItemSelectedListener { menuItem ->

@@ -11,14 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppToolbar
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.TrackedPlayerAdapter
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsApiRepository
+import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 
 class TrackerScreen : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     lateinit var fragmentView: View
     private val table by lazy { fragmentView.findViewById<RecyclerView>(R.id.tracked_players) }
@@ -36,18 +34,14 @@ class TrackerScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        AppToolbar.get().ShowNavigationItem()
+
         table.layoutManager = LinearLayoutManager(MyApp.get().currentActivity)
 
-        //val repository = LeagueOfLegendsSharedDataBase()
-        //val repository = LeagueOfLegendsMockRepository();
-        val repository = LeagueOfLegendsApiRepository();
-
-        val trackedPlayerAdapter = TrackedPlayerAdapter(repository)
-
-        table.adapter = trackedPlayerAdapter
+        table.adapter = SharedPreferencesManager.trackedPlayerAdapter
 
         addButton.setOnClickListener {
-            trackedPlayerAdapter.LoadPlayerData(searchBox.text.toString())
+            SharedPreferencesManager.trackedPlayerAdapter.LoadPlayerData(searchBox.text.toString())
             searchBox.text.clear()
         }
     }

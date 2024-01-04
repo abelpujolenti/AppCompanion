@@ -1,18 +1,20 @@
 package cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
-import cdi.interfacedesign.lolrankedtracker.activities.TrackedPlayerActivity
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppMainMenu
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppToolbar
+import cdi.interfacedesign.lolrankedtracker.fragments.components.AppTrackedPlayer
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.LeaderboardPlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.PlayerData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.provider.LeaderboardPlayerProvider
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.provider.TrackedPlayerProvider
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsRepository
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.viewholder.LeaderboardPlayerViewHolder
+import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,20 +30,25 @@ class LeaderboardPlayerAdapter(repository: LeagueOfLegendsRepository) : Adapter<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderboardPlayerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val viewHolder = LeaderboardPlayerViewHolder(layoutInflater.inflate(R.layout.cell_leaderboard_player, parent, false))
-        /*viewHolder.itemView.setOnClickListener {
-
+        viewHolder.itemView.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 val player: PlayerData? = viewHolder.leaderboardPlayerData?.let { player ->
                     playerProvider.GetPlayer(player.summonerName)
                 }
-                if (player != null) {
-                    MyApp.get().player = player
-                    val intent = Intent(parent.context, TrackedPlayerActivity::class.java)
-                    intent.putExtra(SharedPreferencesManager.PLAYER_KEY, player)
-                    parent.context.startActivity(intent)
+                CoroutineScope(Dispatchers.Main).launch {
+                    if (player != null) {
+                        val appToolbar = AppToolbar.get()
+                        val sharedPreferences = SharedPreferencesManager
+                        sharedPreferences.player = player
+                        sharedPreferences.previousScreen = sharedPreferences.LEADERBOARD_KEY
+                        AppMainMenu.get().ReplaceScreen(AppTrackedPlayer(), false)
+                        appToolbar.toolbar.title = MyApp.get().currentActivity.resources.getString(R.string.profile_title)
+                        appToolbar.ShowBackItem()
+                        appToolbar.HideNavigationItem()
+                    }
                 }
             }
-        }*/
+        }
         return viewHolder
     }
 

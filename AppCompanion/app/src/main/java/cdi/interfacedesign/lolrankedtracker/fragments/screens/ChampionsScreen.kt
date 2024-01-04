@@ -13,6 +13,7 @@ import cdi.interfacedesign.lolrankedtracker.firebase.MyFirebase
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.MatchData
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.provider.PlayerMatchHistoryProvider
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsApiRepository
+import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.CoroutineScope
@@ -58,7 +59,7 @@ class ChampionsScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val player = MyApp.get().player
+        val player = SharedPreferencesManager.player
 
         val repository = LeagueOfLegendsApiRepository()
         val provider = PlayerMatchHistoryProvider(repository)

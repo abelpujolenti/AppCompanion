@@ -35,13 +35,11 @@
 
     </style>
 
-    <style name="LolRankedTracker.Drawer" parent="Widget.MaterialComponents.NavigationRailView">
+    <style name="LolRankedTracker.Drawer" parent="Widget.MaterialComponents.NavigationView">
         <item name="android:background">@color/blue_dark</item>
         <item name="android:elevation">@dimen/shadow_elevation</item>
-        <item name="itemIconTint">@color/yellow_medium</item>
-        <item name="itemTextColor">@color/yellow_dark</item>
+        <item name="itemTextColor">@color/yellow_medium</item>
         <item name="android:fontFamily">?attr/fontFamily</item>
-        <item name="android:textSize">@dimen/medium</item>
     </style>
 
     <style name="LolRankedTracker.Toolbar" parent="Widget.MaterialComponents.Toolbar">

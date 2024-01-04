@@ -17,6 +17,7 @@ import cdi.interfacedesign.lolrankedtracker.firebase.MyFirebase
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.data.LeagueData
 //import cdi.interfacedesign.lolrankedtracker.leagueoflegends.adapter.PlayerProfileAdapter
 import cdi.interfacedesign.lolrankedtracker.leagueoflegends.repositories.LeagueOfLegendsApiRepository
+import cdi.interfacedesign.lolrankedtracker.utils.SharedPreferencesManager
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.CoroutineScope
@@ -53,7 +54,7 @@ class ProfileScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val player = MyApp.get().player
+        val player = SharedPreferencesManager.player
 
         FillLeagueData(player.leagueData?.get(0), rankedTierSoloIcon, rankedTierRankSolo,
             rankedLeaguePointsLeaguePointsSolo, rankedWinsLossesSolo, rankedWinRateSolo)
