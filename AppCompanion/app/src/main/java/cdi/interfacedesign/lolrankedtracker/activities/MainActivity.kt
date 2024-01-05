@@ -12,6 +12,7 @@ import android.widget.Spinner
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import cdi.interfacedesign.lolrankedtracker.MyApp
 import cdi.interfacedesign.lolrankedtracker.R
 import com.google.firebase.messaging.FirebaseMessaging
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContentView(R.layout.screen_main_activity)
 
         MyApp.get().currentActivity = this
