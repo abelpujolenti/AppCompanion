@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/small"
+    android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="180dp"
+        android:layout_height="300dp"
+        card_view:cardCornerRadius="@dimen/medium"
+        android:layout_marginEnd="@dimen/tiny"
+        card_view:cardBackgroundColor="@color/blue_dark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="@dimen/tiny">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/player_profile_ranked_cell_tier_icon_solo"
+                android:layout_width="106dp"
+                android:layout_height="106dp"
+                android:layout_gravity="center"
+                tool:srcCompat="@drawable/challenger">
+
+            </com.google.android.material.imageview.ShapeableImageView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/beaufort_regular"
+                android:textSize="20dp"
+                android:text="Ranked Solo/Duo">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player_profile_ranked_cell_tier_rank_solo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="20dp"
+                tool:text="Challenger">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player_profile_ranked_cell_league_points_solo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/yellow_medium"
+                android:textSize="20dp"
+                tool:text="1127 LP">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player_profile_ranked_cell_wins_losses_solo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/grey_dark"
+                android:textSize="20dp"
+                android:layout_marginTop="@dimen/medium"
+                tool:text="57W 30L">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player_profile_ranked_cell_win_rate_solo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/grey_dark"
+                android:textSize="20dp"
+                android:layout_marginBottom="@dimen/medium"
+                tool:text="65.5% Win Rate">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="180dp"
+        android:layout_height="300dp"
+        card_view:cardCornerRadius="@dimen/medium"
+        android:layout_marginStart="@dimen/tiny"
+        card_view:cardBackgroundColor="@color/blue_dark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="@dimen/tiny">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/player_profile_ranked_cell_tier_icon_flex"
+                android:layout_width="106dp"
+                android:layout_height="106dp"
+                android:layout_gravity="center"
+                tool:srcCompat="@drawable/challenger">
+
+            </com.google.android.material.imageview.ShapeableImageView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/beaufort_regular"
+                android:textSize="20dp"
+                android:text="Ranked Flex">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player_profile_ranked_cell_tier_rank_flex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="20dp"
+                tool:text="Challenger">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player_profile_ranked_cell_league_points_flex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/yellow_medium"
+                android:textSize="20dp"
+                tool:text="1127 LP">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player_profile_ranked_cell_wins_losses_flex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/grey_dark"
+                android:textSize="20dp"
+                android:layout_marginTop="@dimen/medium"
+                tool:text="57W 30L">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/player_profile_ranked_cell_win_rate_flex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/grey_dark"
+                android:textSize="20dp"
+                android:layout_marginBottom="@dimen/medium"
+                tool:text="65.5% Win Rate">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

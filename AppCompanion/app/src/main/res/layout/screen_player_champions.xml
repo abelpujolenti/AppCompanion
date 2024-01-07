@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/tiny">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="@string/champions_most_played">
+
+        </TextView>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="@string/champions_highest_win_rate">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_margin="@dimen/small">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_weight="0.5">
+
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/tiny"
+                card_view:cardCornerRadius="@dimen/large"
+                card_view:cardBackgroundColor="@color/blue_dark">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="@dimen/tiny"
+                    android:layout_marginVertical="@dimen/medium">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/player_champions_cell_most_played_champion_image_0"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/tiny"
+                            tool:srcCompat="@drawable/syndra">
+
+                        </com.google.android.material.imageview.ShapeableImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/player_champions_cell_most_played_champion_value_0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/beaufort_regular"
+                            android:textSize="@dimen/small"
+                            android:layout_margin="@dimen/tiny"
+                            tool:text="21">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/player_champions_cell_most_played_champion_image_1"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/tiny"
+                            tool:srcCompat="@drawable/syndra">
+
+                        </com.google.android.material.imageview.ShapeableImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/player_champions_cell_most_played_champion_value_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/beaufort_regular"
+                            android:textSize="@dimen/small"
+                            android:layout_margin="@dimen/tiny"
+                            tool:text="17">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/player_champions_cell_most_played_champion_image_2"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/tiny"
+                            tool:srcCompat="@drawable/syndra">
+
+                        </com.google.android.material.imageview.ShapeableImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/player_champions_cell_most_played_champion_value_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/beaufort_regular"
+                            android:textSize="@dimen/small"
+                            android:layout_margin="@dimen/tiny"
+                            tool:text="16">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/player_champions_cell_most_played_champion_image_3"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/tiny"
+                            tool:srcCompat="@drawable/syndra">
+
+                        </com.google.android.material.imageview.ShapeableImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/player_champions_cell_most_played_champion_value_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/beaufort_regular"
+                            android:textSize="@dimen/small"
+                            android:layout_margin="@dimen/tiny"
+                            tool:text="13">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_weight="0.5">
+
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/tiny"
+                card_view:cardCornerRadius="@dimen/large"
+                card_view:cardBackgroundColor="@color/blue_dark">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="@dimen/tiny"
+                    android:layout_marginVertical="@dimen/medium">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/player_champions_cell_highest_win_rate_champion_image_0"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/tiny"
+                            tool:srcCompat="@drawable/syndra">
+
+                        </com.google.android.material.imageview.ShapeableImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/player_champions_cell_highest_win_rate_champion_value_0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/beaufort_regular"
+                            android:textSize="@dimen/small"
+                            android:layout_margin="@dimen/tiny"
+                            tool:text="21">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/player_champions_cell_highest_win_rate_champion_image_1"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/tiny"
+                            tool:srcCompat="@drawable/syndra">
+
+                        </com.google.android.material.imageview.ShapeableImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/player_champions_cell_highest_win_rate_champion_value_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/beaufort_regular"
+                            android:textSize="@dimen/small"
+                            android:layout_margin="@dimen/tiny"
+                            tool:text="17">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/player_champions_cell_highest_win_rate_champion_image_2"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/tiny"
+                            tool:srcCompat="@drawable/syndra">
+
+                        </com.google.android.material.imageview.ShapeableImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/player_champions_cell_highest_win_rate_champion_value_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/beaufort_regular"
+                            android:textSize="@dimen/small"
+                            android:layout_margin="@dimen/tiny"
+                            tool:text="16">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/player_champions_cell_highest_win_rate_champion_image_3"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/tiny"
+                            tool:srcCompat="@drawable/syndra">
+
+                        </com.google.android.material.imageview.ShapeableImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/player_champions_cell_highest_win_rate_champion_value_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/beaufort_regular"
+                            android:textSize="@dimen/small"
+                            android:layout_margin="@dimen/tiny"
+                            tool:text="13">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
