@@ -25,7 +25,7 @@ class TrackedPlayerViewHolder(view: View, var player: PlayerData? = null) : View
     val playerSoloLeaguePoints by lazy { view.findViewById<TextView>(R.id.tracker_player_cell_league_points) }
     val discardButton by lazy { view.findViewById<ImageButton>(R.id.discard_button) }
 
-    fun SetupWithTrackedPlayer(player: PlayerData, removeLambda: () -> Unit){
+    fun SetupWithTrackedPlayer(player: PlayerData, removeLambda: (adapterPosition: Int) -> Unit){
 
         MyFirebase.storage.LoadImage("/profileIcon/${player.profileIconId}.png").downloadUrl
             .addOnSuccessListener { uri ->
@@ -66,7 +66,7 @@ class TrackedPlayerViewHolder(view: View, var player: PlayerData? = null) : View
         }
 
         discardButton.setOnClickListener {
-            removeLambda()
+            removeLambda(adapterPosition)
         }
 
         this.player = player

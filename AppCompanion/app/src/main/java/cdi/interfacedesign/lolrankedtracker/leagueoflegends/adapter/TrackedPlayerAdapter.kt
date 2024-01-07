@@ -43,8 +43,8 @@ class TrackedPlayerAdapter(repository: LeagueOfLegendsRepository) : Adapter<Trac
 
     override fun onBindViewHolder(holder: TrackedPlayerViewHolder, position: Int) {
         holder.SetupWithTrackedPlayer(playerList[position]){
-            playerList.removeAt(position)
-            notifyItemRemoved(position)
+            playerList.removeAt(it)
+            notifyItemRemoved(it)
         }
     }
 
